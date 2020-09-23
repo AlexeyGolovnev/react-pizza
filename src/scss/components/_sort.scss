@@ -1,53 +1,63 @@
-@import 'variables';
+@import './../variables';
+@import '../mixins';
 
 .sort {
   position: relative;
+  @include flex-setting(flex, row, center, center, nowrap);
+
+
   &__label {
-    display: flex;
-    align-items: center;
+    position: relative;
+    margin-right: 5px;
 
-    svg {
-      margin-right: 8px;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: -25px;
+      display: block;
+      width: 25px;
+      height: 10px;
+      background: url('../../assets/img/arrow-top.svg') no-repeat center center;
+      transition: transform $duration linear;
+      transform: rotate(180deg);
     }
+  }
 
-    b {
-      margin-right: 8px;
-    }
+   &.open &__label::before {
+    transform: rotate(0deg);
+  }
 
-    span {
-      color: $orange;
-      border-bottom: 1px dashed $orange;
-      cursor: pointer;
-    }
+  &__name {
+    color: $orange;
+    border-bottom: 1px dashed $orange;
+    cursor: pointer;
   }
 
   &__popup {
+    display:none;
     position: absolute;
-    right: 0;
-    margin-top: 15px;
-    background: #ffffff;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.09);
+    top: 30px;
+    right: -25px;
+    padding: 5px 0;
+    background-color: #fff;
     border-radius: 10px;
-    overflow: hidden;
-    padding: 10px 0;
-    width: 160px;
+    box-shadow: 0 0 8px 1px $orange;
 
-    ul {
-      overflow: hidden;
-      li {
-        padding: 12px 20px;
-        cursor: pointer;
+    &-item {
+      padding: 10px 10px;
+      cursor: pointer;
+      width: 100%;
 
-        &.active,
-        &:hover {
-          background: rgba(254, 95, 30, 0.05);
-        }
-
-        &.active {
-          font-weight: bold;
-          color: $orange;
-        }
+      &:hover {
+        color: $orange;
+        background-color: rgba(254, 95, 30, 0.05);
       }
     }
+
+    &.open {
+      @include flex-setting(flex, column, center, flex-start, nowrap);
+    }
   }
+
 }

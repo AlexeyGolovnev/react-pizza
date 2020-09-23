@@ -1,9 +1,19 @@
 import React from 'react';
+import classNames from 'classnames';
 
-function PizzasDoughItem(props) {
+function PizzasOptionsItem({isDisabled,isSelected,text,handlerOptionsSelection}) {
     return (
-        <input className='pizzas__dough-item' type='button'  value = 'Традиционное'/>
+        <input
+            className={classNames('pizzas__options-item', {
+                'disabled': isDisabled,
+                'selected': isSelected,
+            })}
+            disabled={isDisabled}
+            type='button'
+            value={text}
+            onClick={handlerOptionsSelection}
+        />
     );
 }
 
-export default PizzasDoughItem;
+export default PizzasOptionsItem;

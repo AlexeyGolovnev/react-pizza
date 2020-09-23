@@ -1,24 +1,97 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Button from "../Button/Button";
 import AddBtn from "../Button/AddBtn";
+import PizzasItemOptions from "./PizzasItemOptions";
+import {addPizzaToBasket, calculateTotalData} from "../../redux/action";
+import {useSelector} from "react-redux";
 
-function PizzaItem(props) {
+function PizzasItem(
+    {
+        pizzaId,
+        imageUrl,
+        name, doughs,
+        sizes,
+        price,
+        dispatch,
+        selectedOptions,
+        currentCategory,
+        currentSortCriterion
+    }) {
+
+    const doughTypes = useSelector(state => state.pizzas.doughTypes);
+    const pizzaSizes = useSelector(state => state.pizzas.pizzaSizes);
+    const [currentCount, setCurrentCount] = useState(0);
+
+    useEffect( () => {
+        setCurrentCount(0);
+    },[currentCategory, currentSortCriterion]);
+
+    const addToBasket = (e, pizzaId) => {
+        e.preventDefault();
+        selectedOptions.forEach(option => {
+            if (option.pizzaId === pizzaId) {
+                dispatch(addPizzaToBasket(option.pizzaId, option.doughId, option.sizeId, 1, option.currentPrice))
+                if (option.doughId && option.sizeId) setCurrentCount(currentCount + 1)
+            }
+        })
+        dispatch(calculateTotalData());
+    }
+
+    let currentPrice = 0;
+    selectedOptions.forEach(option => {
+        if (option.pizzaId === pizzaId && option.sizeId) currentPrice = option.currentPrice;
+    })
+
+    const selectedDoughs = selectedOptions.map(option => {
+        if (pizzaId === option.pizzaId) {
+            if (option.doughId) return option.doughId
+        }
+    })
+    const selectedSizes = selectedOptions.map(option => {
+        if (pizzaId === option.pizzaId) {
+            if (option.sizeId) return option.sizeId;
+        }
+    })
+
     return (
         <div className="pizzas__item">
             <div className="pizzas__item-img-box">
                 <img className='pizzas__item-img'
-                     src='https://cdn.dodostatic.net/static/Img/Products/Pizza/ru-RU/7d2d57ef-1e81-4e96-9558-a1e0321471e7.jpg'/>
+                     src={imageUrl}
+                     alt={name}
+                />
             </div>
-            <span className='pizzas__item-name'>Чизбургер-пицца</span>
-            <div className="pizzas_item-options">
-
-            </div>
+            <span className='pizzas__item-name'>{name}</span>
+            <PizzasItemOptions
+                pizzaId={pizzaId}
+                doughs={doughs}
+                sizes={sizes}
+                selectedDoughs={selectedDoughs}
+                selectedSizes={selectedSizes}
+                setCurrentCount={setCurrentCount}
+                doughTypes={doughTypes}
+                pizzaSizes={pizzaSizes}
+                dispatch = {dispatch}
+            />
             <div className="pizzas__item-footer">
-                <span className='pizza__item-price'>от 365$</span>
-                <Button add children={<AddBtn/>}/>
+                {currentPrice > 0
+                    ? <span className='pizzas__item-price'>{currentPrice} руб.</span>
+                    : <span className='pizzas__item-price'>от {price} руб.</span>
+                }
+                <Button
+                    outline
+                    children={
+                        <AddBtn
+                            currentCount={currentCount}
+                            classes={currentCount === 0 && 'hidden'}
+                        />
+                    }
+                    action={(e) => addToBasket(e, pizzaId)}
+                />
             </div>
         </div>
     );
 }
 
-export default PizzaItem;
+
+export default PizzasItem;

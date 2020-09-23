@@ -1,31 +1,29 @@
-@import 'variables';
+@import './../variables';
+@import "./../mixins";
 
 .categories {
-  ul {
-    display: flex;
 
-    li {
-      background-color: #f9f9f9;
-      padding: 13px 30px;
-      border-radius: 30px;
-      margin-right: 10px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.1s ease-in-out;
-      @include noselect();
-
-      &:hover {
-        background-color: darken(#f9f9f9, 2%);
-      }
-
-      &:active {
-        background-color: darken(#f9f9f9, 5%);
-      }
-
-      &.active {
-        background-color: #282828;
-        color: #fff;
-      }
+  &__item {
+    display:inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: $gray;
+    padding: 10px 20px;
+    border-radius: 20px;
+    @include font-style(1rem, bold);
+    color:$black;
+    transition: background-color $duration linear;
+    margin: 0 10px 10px 0;
+    &:hover {
+      background-color: $black;
+      color:#fff;
     }
+
+    &.current {
+      background-color: $black;
+      color:#fff;
+    }
+
   }
 }

@@ -1,0 +1,12 @@
+@mixin font-style ($font-size, $font-weight) {
+  font-size:$font-size;
+  font-weight: $font-weight;
+}
+
+@mixin flex-setting ($display:flex, $flex-direction:row, $justify-content:flex-start, $align-items:flex-start, $flex-wrap:nowrap) {
+  display:$display;
+  flex-direction: $flex-direction;
+  justify-content: $justify-content;
+  align-items: $align-items;
+  flex-wrap: $flex-wrap;
+}
