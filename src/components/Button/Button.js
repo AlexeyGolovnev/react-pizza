@@ -2,11 +2,12 @@ import React from 'react';
 import classNames from 'classnames';
 import {Link} from "react-router-dom";
 
-function Button({basket, outline, children, action}) {
+
+function Button({basket, outline, children, action, classes ,back}) {
     return (
         <Link
-            to='/basket'
-            className={classNames('button', {
+            to = {back ? '/':'/basket'}
+            className={classNames('button', classes,{
                 'button_basket': basket,
                 'button_add': outline,
             })}

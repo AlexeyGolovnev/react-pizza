@@ -30,7 +30,7 @@
     }
 
     & > .total-count {
-      & > i {
+      & > .icon {
         margin-right: 5px;
         font-size: 14px;
       }
@@ -43,7 +43,7 @@
     color: $orange;
     height: 40px;
 
-    & > i {
+    & > .icon {
       font-size: 14px;
       margin-right: 5px;
     }
@@ -73,4 +73,24 @@
       display: none;
     }
   }
+
+  &_back {
+    color: #777777;
+    border: 1px solid #777777;
+    transition: background-color $duration linear;
+
+    &:hover {
+      background-color: #000;
+    }
+
+    & > span {
+      margin-left: 10px;
+    }
+  }
+
+  &_pay {
+    padding: 0 20px;
+    height: 40px;
+  }
+
 }

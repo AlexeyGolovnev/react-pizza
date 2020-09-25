@@ -1,51 +1,51 @@
 import React, {useEffect} from 'react';
 import PizzasItem from "./PizzasItem";
-import {getDoughTypes, getPizzas, getPizzaSizes} from "../../redux/action";
+import {clearSelectedOptions, getDoughTypes, getPizzas, getPizzaSizes} from "../../redux/action";
 import {useDispatch, useSelector} from "react-redux";
+import {createSelector} from 'reselect';
 
 function Pizzas() {
 
     const dispatch = useDispatch();
 
-    const pizzas = useSelector(state => state.pizzas.pizzas);
-
-    const currentCategory = useSelector(state => state.pizzas.currentCategory);
-    const currentSortCriterion = useSelector(state => state.pizzas.currentSortCriterion);
-    const categories = useSelector (state => state.pizzas.categories);
-
-    const selectedOptions = useSelector(state => state.pizzas.selectedOptions);
-
     useEffect(() => {
+        dispatch(clearSelectedOptions());
         dispatch(getPizzas());
         dispatch(getDoughTypes());
         dispatch(getPizzaSizes());
-    },[]);
+    }, []);
 
-    const filteredPizzas = pizzas.filter(pizza => {
-        return pizza.category.includes(currentCategory);
-    })
+    const currentCategoryId = useSelector(state => state.pizzas.currentCategory);
+    const currentSortCriterionId = useSelector(state => state.pizzas.currentSortCriterion);
+    const currentCategory = createSelector(
+        state => state.pizzas.categories,
+        categories => categories.find(category => category.id === currentCategoryId)
+    );
+    const filteredPizzas = createSelector(
+        state => state.pizzas.pizzas,
+        pizzas => pizzas.filter(pizza => pizza.category.includes(currentCategoryId))
+    );
+    const pizzas = useSelector(filteredPizzas);
+    const category = useSelector(currentCategory);
 
-    const pizzasJsx = filteredPizzas.map( pizza => {
+    const pizzasJsx = pizzas.map(pizza => {
         return (
             <PizzasItem
-                key = {pizza.id}
-                pizzaId = {pizza.id}
-                imageUrl = {pizza.imageUrl}
-                name = {pizza.name}
-                doughs = {pizza.doughs}
-                sizes = {pizza.sizes}
-                price = {pizza.price}
-                category = {pizza.category}
-                rating = {pizza.rating}
-                dispatch = {dispatch}
-                selectedOptions = {selectedOptions}
-                currentCategory = {currentCategory}
-                currentSortCriterion = {currentSortCriterion}
+                key={pizza.id}
+                pizzaId={pizza.id}
+                imageUrl={pizza.imageUrl}
+                name={pizza.name}
+                doughs={pizza.doughs}
+                sizes={pizza.sizes}
+                price={pizza.price}
+                category={pizza.category}
+                rating={pizza.rating}
+                dispatch={dispatch}
+                currentCategory={currentCategoryId}
+                currentSortCriterion={currentSortCriterionId}
             />
         );
     });
-
-    const category = categories.find(category => category.id === currentCategory);
 
     return (
         <div className='pizzas'>

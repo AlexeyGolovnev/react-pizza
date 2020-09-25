@@ -5,10 +5,10 @@ import Pizzas from "../components/Pizzas/Pizzas";
 function Main() {
 
     return (
-        <main>
+        <>
             <Navigation />
             <Pizzas />
-        </main>
+        </>
     );
 }
 

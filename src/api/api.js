@@ -6,7 +6,7 @@ const axiosInstance = axios.create({
     withCredentials:true,
 })
 
-export const getPizzasFromApi = (sortCriteria) => {
+export const  getPizzasFromApi = (sortCriteria) => {
        return axiosInstance.get(`pizzas?_sort=${sortCriteria.nameField}&_order=${sortCriteria.order}`);
 }
 

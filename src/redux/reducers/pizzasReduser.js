@@ -16,9 +16,7 @@ const initialState = {
     currentCategory: 0,
     currentSortCriterion: 1,
     selectedOptions: []
-
 }
-
 
 export const pizzasReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -83,8 +81,8 @@ export const pizzasReducer = (state = initialState, action) => {
                     ...state,
                     selectedOptions: [...state.selectedOptions, {
                         pizzaId: action.payload.pizzaId,
-                        doughId: action.payload.doughId ? action.payload.doughId : '',
-                        sizeId: action.payload.sizeId ? action.payload.sizeId : '',
+                        doughId: action.payload.doughId && action.payload.doughId ,
+                        sizeId: action.payload.sizeId &&  action.payload.sizeId,
                         currentPrice: currentPrice,
                     }]
                 }

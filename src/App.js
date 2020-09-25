@@ -10,10 +10,12 @@ function App() {
     return (
         <div className='app-wrapper'>
             <Header/>
-            <Switch>
-                <Route exact path='/' component={Main}/>
-                <Route path='/basket' component={Basket}/>
-            </Switch>
+                <main>
+                    <Switch>
+                        <Route exact path='/' component={Main}/>
+                        <Route path='/basket' component={Basket}/>
+                    </Switch>
+                </main>
         </div>
     );
 }

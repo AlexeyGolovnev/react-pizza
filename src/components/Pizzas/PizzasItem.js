@@ -4,6 +4,7 @@ import AddBtn from "../Button/AddBtn";
 import PizzasItemOptions from "./PizzasItemOptions";
 import {addPizzaToBasket, calculateTotalData} from "../../redux/action";
 import {useSelector} from "react-redux";
+import {createSelector} from 'reselect';
 
 function PizzasItem(
     {
@@ -13,19 +14,9 @@ function PizzasItem(
         sizes,
         price,
         dispatch,
-        selectedOptions,
         currentCategory,
         currentSortCriterion
     }) {
-
-    const doughTypes = useSelector(state => state.pizzas.doughTypes);
-    const pizzaSizes = useSelector(state => state.pizzas.pizzaSizes);
-    const [currentCount, setCurrentCount] = useState(0);
-
-    useEffect( () => {
-        setCurrentCount(0);
-    },[currentCategory, currentSortCriterion]);
-
     const addToBasket = (e, pizzaId) => {
         e.preventDefault();
         selectedOptions.forEach(option => {
@@ -37,21 +28,41 @@ function PizzasItem(
         dispatch(calculateTotalData());
     }
 
-    let currentPrice = 0;
-    selectedOptions.forEach(option => {
-        if (option.pizzaId === pizzaId && option.sizeId) currentPrice = option.currentPrice;
-    })
+    const selectedOptions = useSelector(state => state.pizzas.selectedOptions);
+    const doughTypes = useSelector(state => state.pizzas.doughTypes);
+    const pizzaSizes = useSelector(state => state.pizzas.pizzaSizes);
+    const selectedDoughsId = createSelector(
+        state => state.pizzas.selectedOptions,
+        selectedOptions => selectedOptions.map(option => {
+            if (pizzaId === option.pizzaId) {
+                if (option.doughId) return option.doughId
+            }
+        })
+    );
 
-    const selectedDoughs = selectedOptions.map(option => {
-        if (pizzaId === option.pizzaId) {
-            if (option.doughId) return option.doughId
-        }
-    })
-    const selectedSizes = selectedOptions.map(option => {
-        if (pizzaId === option.pizzaId) {
-            if (option.sizeId) return option.sizeId;
-        }
-    })
+    const selectedSizesId = createSelector(
+        state => state.pizzas.selectedOptions,
+        selectedOptions => selectedOptions.map(option => {
+            if (pizzaId === option.pizzaId) {
+                if (option.sizeId) return option.sizeId
+            }
+        })
+    );
+    const selectedDoughs = useSelector(selectedDoughsId);
+    const selectedSizes = useSelector(selectedSizesId);
+    const [currentCount, setCurrentCount] = useState(0);
+    const [currentPrice, setCurrentPrice] = useState(0);
+
+
+    useEffect(() => {
+        setCurrentCount(0);
+    }, [currentCategory, currentSortCriterion]);
+
+    useEffect(() => {
+        selectedOptions.forEach(option => {
+            if (option.pizzaId === pizzaId) setCurrentPrice(option.currentPrice);
+        })
+    }, [selectedSizes])
 
     return (
         <div className="pizzas__item">
@@ -71,7 +82,7 @@ function PizzasItem(
                 setCurrentCount={setCurrentCount}
                 doughTypes={doughTypes}
                 pizzaSizes={pizzaSizes}
-                dispatch = {dispatch}
+                dispatch={dispatch}
             />
             <div className="pizzas__item-footer">
                 {currentPrice > 0

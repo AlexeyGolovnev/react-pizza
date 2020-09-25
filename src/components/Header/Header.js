@@ -5,10 +5,8 @@ import BasketBtn from "../Button/BasketBtn";
 import {useSelector} from "react-redux";
 
 function Header() {
-
     const totalCount = useSelector(state => state.basket.totalCount);
     const totalPrice = useSelector(state => state.basket.totalPrice);
-
     return (
         <header className='header'>
             <div className="container">
@@ -18,7 +16,7 @@ function Header() {
                             <img className='header__logo-img' src={logo} alt='logo'/>
                             <div className='header__logo-text-box'>
                                 <h1 className='header__logo-title'>React Pizza</h1>
-                                <span className='header__logo-subtitle'>Самая вкусная пицца во вселенной</span>
+                                <span className='header__logo-subtitle'>Самая реактивная пицца</span>
                             </div>
                         </div>
                     </div>

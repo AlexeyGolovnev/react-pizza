@@ -8,17 +8,23 @@ import {
 import {
     ADD_PIZZA_TO_BASKET,
     CALCULATE_TOTAL_DATA,
-    CHANGE_CATEGORY, CHANGE_SORT_CRITERION, CLEAR_SELECTED_OPTIONS,
+    CHANGE_CATEGORY,
+    CHANGE_SORT_CRITERION,
+    CLEAR_BASKET,
+    CLEAR_SELECTED_OPTIONS,
+    DELETE_ONE_PIZZA_FROM_BASKET,
+    DELETE_PIZZA_FROM_BASKET,
     GET_CATEGORIES,
     GET_DOUGH_TYPES,
     GET_PIZZA_SIZES,
-    GET_PIZZAS, GET_SORT_CRITERIA,
-    SELECT_OPTIONS
+    GET_PIZZAS,
+    GET_SORT_CRITERIA,
+    SELECT_OPTIONS,
 } from "./actionTypes";
 
 export const getPizzas = (sortCriteria = {nameField: 'rating', order:'DESC'}) => {
-    return function (dispatch) {
-        getPizzasFromApi(sortCriteria)
+    return async function (dispatch) {
+        await getPizzasFromApi(sortCriteria)
             .then(response => {
                 dispatch({
                     type: GET_PIZZAS,
@@ -29,8 +35,8 @@ export const getPizzas = (sortCriteria = {nameField: 'rating', order:'DESC'}) =>
 }
 
 export const getDoughTypes = () => {
-    return function (dispatch) {
-        getDoughTypesFromApi()
+    return async function (dispatch) {
+        await getDoughTypesFromApi()
             .then(response => {
                 dispatch({
                     type: GET_DOUGH_TYPES,
@@ -41,8 +47,8 @@ export const getDoughTypes = () => {
 }
 
 export const getPizzaSizes = () => {
-    return function (dispatch) {
-        getSizesFromApi()
+    return async function (dispatch) {
+        await getSizesFromApi()
             .then(response => {
                 dispatch({
                     type: GET_PIZZA_SIZES,
@@ -53,8 +59,8 @@ export const getPizzaSizes = () => {
 }
 
 export const getCategories = () => {
-    return function (dispatch) {
-        getCategoriesFromApi()
+    return async function (dispatch) {
+        await getCategoriesFromApi()
             .then(response => {
                 dispatch({
                     type: GET_CATEGORIES,
@@ -65,8 +71,8 @@ export const getCategories = () => {
 }
 
 export const getSortCriteria = () => {
-    return function (dispatch) {
-        getSortCriteriaFromApi()
+    return async function (dispatch) {
+        await getSortCriteriaFromApi()
             .then(response => {
                 dispatch({
                     type: GET_SORT_CRITERIA,
@@ -86,6 +92,7 @@ export const selectOptions = (pizzaId, doughId, sizeId) => {
         }
     }
 }
+
 export const clearSelectedOptions = () => {
     return {
         type: CLEAR_SELECTED_OPTIONS,
@@ -115,6 +122,34 @@ export const addPizzaToBasket = (pizzaId, doughId, sizeId, pizzasCount, price) =
             sizeId: sizeId,
             pizzasCount: pizzasCount,
             price: price,
+        }
+    }
+}
+
+export const deleteOnePizzaFromBasket = (pizzaId, doughId, sizeId) => {
+    return {
+        type:DELETE_ONE_PIZZA_FROM_BASKET,
+        payload: {
+            pizzaId: pizzaId,
+            doughId: doughId,
+            sizeId: sizeId,
+        }
+    }
+}
+
+export const clearBasket = () => {
+    return {
+        type:CLEAR_BASKET
+    }
+}
+
+export const deletePizzaFromBasket = (pizzaId, doughId, sizeId) => {
+    return {
+        type: DELETE_PIZZA_FROM_BASKET,
+        payload: {
+            pizzaId: pizzaId,
+            doughId: doughId,
+            sizeId: sizeId,
         }
     }
 }

@@ -1,0 +1,164 @@
+@import "./../variables";
+@import "./../mixins";
+
+.basket {
+  &__inner {
+    @include flex-setting(flex, column, center, space-between, nowrap);
+    margin: 0 auto;
+    padding: 20px 0;
+    max-width: 70%;
+  }
+
+  &__header {
+    @include flex-setting(flex, row, space-between, center, nowrap);
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid $gray;
+
+    &-left-part {
+      @include flex-setting(flex, row, center, center, nowrap);
+      @include font-style(1.2rem, 700);
+
+      & > span {
+        margin-left: 10px;
+        @include font-style(1.6rem, 700);
+        color: #000;
+      }
+    }
+
+    &-right-part {
+      @include flex-setting(flex, row, center, center, nowrap);
+      cursor: pointer;
+      color: #D7D7D7;
+      transition: color $duration linear;
+
+      &:hover {
+        color: #000;
+      }
+
+      & > span {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  &__content {
+    @include flex-setting(flex, column, center, space-between, nowrap);
+
+    &-total {
+      @include flex-setting(flex, row, space-between, center, nowrap);
+      @include font-style(1.2rem, 500);
+      margin-top: 10px;
+
+      &-count {
+
+      }
+
+      &-price {
+        & > b {
+          color: $orange;
+        }
+      }
+    }
+  }
+
+  &__item {
+    @include flex-setting(flex, row, space-between, center, nowrap);
+
+    padding: 10px 0;
+    border-bottom: 1px solid $gray;
+
+    &-img-option-box{
+      @include flex-setting(flex, row, flex-start, center, nowrap);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    &-img-box {
+      width: 100px;
+      margin-right: 10px;
+    }
+
+    &-img {
+      max-width: 100%;
+    }
+
+    &-option-box {
+      @include flex-setting(flex, column, center, flex-start, nowrap);
+    }
+
+    &-name {
+      @include font-style(1.2rem, 700);
+    }
+
+    &-option {
+      color: #8D8D8D;
+    }
+
+    &-count-box {
+      @include flex-setting(flex, row, center, flex-start, nowrap);
+    }
+
+    &-icon {
+      display: block;
+      padding: 0 5px;
+      height: 23px;
+      background-color: #fff;
+      border: 1px solid $orange;
+      border-radius: 50%;
+      color: $orange;
+      font-size: 1.7rem;
+      margin: 0 10px;
+      cursor: pointer;
+      transition: background-color $duration linear;
+
+      &:hover {
+        background-color: #fe5f1e;
+        color: #fff;
+      }
+
+      &.times {
+        border: none;
+        font-size: 2.3rem;
+        color: #D7D7D7;
+        transition: color $duration linear;
+      }
+
+      &:hover.times {
+        background-color: transparent;
+        color: #e41b1b;
+      }
+    }
+
+    &-count {
+      @include font-style(1.2rem, 700);
+    }
+
+    &-price {
+      @include font-style(1.2rem, 700);
+      width: 120px;
+    }
+
+  }
+
+  &__footer {
+    @include flex-setting(flex, row, space-between, center, nowrap);
+    margin-top: 20px;
+  }
+
+
+
+  &__empty-inner {
+    padding: 100px 0;
+    @include flex-setting(flex, column, center, center, nowrap);
+    &>h2 {
+      margin-bottom: 10px;
+    }
+    &>span {
+      color:#777777;
+    }
+  }
+  &__empty-img {
+    margin: 50px 0;
+    max-width: 300px;
+  }
+}
