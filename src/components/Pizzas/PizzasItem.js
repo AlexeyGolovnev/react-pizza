@@ -27,7 +27,6 @@ function PizzasItem(
         })
         dispatch(calculateTotalData());
     }
-
     const selectedOptions = useSelector(state => state.pizzas.selectedOptions);
     const doughTypes = useSelector(state => state.pizzas.doughTypes);
     const pizzaSizes = useSelector(state => state.pizzas.pizzaSizes);

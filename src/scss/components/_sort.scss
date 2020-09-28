@@ -4,7 +4,7 @@
 .sort {
   position: relative;
   @include flex-setting(flex, row, center, center, nowrap);
-
+  min-width: 250px;
 
   &__label {
     position: relative;

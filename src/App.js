@@ -9,7 +9,7 @@ import Basket from "./pages/Basket";
 function App() {
     return (
         <div className='app-wrapper'>
-            <Header/>
+            <Header />
                 <main>
                     <Switch>
                         <Route exact path='/' component={Main}/>

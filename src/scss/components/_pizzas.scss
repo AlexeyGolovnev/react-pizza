@@ -2,7 +2,7 @@
 @import './../mixins';
 
 .pizzas {
-
+  position: relative;
   &__inner {
     @include flex-setting(flex, column, center);
     padding: 10px 0;

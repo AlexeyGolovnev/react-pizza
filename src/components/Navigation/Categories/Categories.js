@@ -11,8 +11,6 @@ function Categories({dispatch, categories, currentCategory}) {
         }
 
     }
-
-
     const categoriesJsx = categories.map( category => {
         return <CategoryItem
             key = {category.id}

@@ -1,31 +1,28 @@
-@import './../variables';
+@import "./../variables";
 @import "./../mixins";
 
 .categories {
-  @include flex-setting(flex,row,center,center,wrap);
+  @include flex-setting(flex, row, flex-start, center, wrap);
   margin-right: 50px;
-
+  padding-top: 10px;
   &__item {
-    display:inline-flex;
-    justify-content: center;
-    align-items: center;
+    @include flex-setting(flex, row, center, center, nowrap);
+    @include font-style(0.9rem, bold);
     cursor: pointer;
     background-color: $gray;
     padding: 10px 20px;
     border-radius: 20px;
-    @include font-style(1rem, bold);
-    color:$black;
+    color: $black;
     transition: background-color $duration linear;
-    margin: 0 10px 0 0;
+    margin: 0 10px 10px 0;
     &:hover {
       background-color: $black;
-      color:#fff;
+      color: #fff;
     }
 
     &.current {
       background-color: $black;
-      color:#fff;
+      color: #fff;
     }
-
   }
 }

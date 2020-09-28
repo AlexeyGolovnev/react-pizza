@@ -1,9 +1,9 @@
+@import './../mixins';
+
 .navigation {
 
   &__inner {
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
+    @include flex-setting(flex, row, space-between, center, nowrap);
     padding: 25px 0;
+    }
   }
-}
