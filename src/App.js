@@ -1,21 +1,24 @@
-import React from 'react';
+import React, {Suspense, lazy} from 'react';
 import {Route, Switch} from 'react-router-dom';
 import './scss/app.scss'
 import Header from "./components/Header/Header";
-import Main from "./pages/Main";
-import Basket from "./pages/Basket";
+import Spinner from "./components/Spinner/Spinner";
 
+const Main = lazy(() => import("./pages/Main"));
+const Basket = lazy(() => import("./pages/Basket"));
 
 function App() {
     return (
         <div className='app-wrapper'>
-            <Header />
-                <main>
-                    <Switch>
+            <Header/>
+            <main>
+                <Switch>
+                    <Suspense fallback={<Spinner/>}>
                         <Route exact path='/' component={Main}/>
                         <Route path='/basket' component={Basket}/>
-                    </Switch>
-                </main>
+                    </Suspense>
+                </Switch>
+            </main>
         </div>
     );
 }
