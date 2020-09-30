@@ -4,13 +4,13 @@ import {
   CALCULATE_TOTAL_DATA,
   CLEAR_BASKET,
   DELETE_ONE_PIZZA_FROM_BASKET,
-  DELETE_PIZZA_FROM_BASKET,
-} from "../actionTypes";
+  DELETE_PIZZA_FROM_BASKET
+} from '../actionTypes';
 
 const initialState = {
   selectedPizzas: [],
   totalPrice: 0,
-  totalCount: 0,
+  totalCount: 0
 };
 
 export const basketReducer = (state = initialState, action) => {
@@ -35,8 +35,8 @@ export const basketReducer = (state = initialState, action) => {
     case ADD_PIZZA_TO_BASKET: {
       if (action.payload.doughId && action.payload.sizeId) {
         if (state.selectedPizzas.length > 0) {
-          let isEqual = checkCompare()[1];
-          let equalItemIndex = checkCompare()[0];
+          const isEqual = checkCompare()[1];
+          const equalItemIndex = checkCompare()[0];
           if (isEqual) {
             return {
               ...state,
@@ -48,13 +48,13 @@ export const basketReducer = (state = initialState, action) => {
                   );
                 }
                 return pizza;
-              }),
+              })
             };
           }
         }
         return {
           ...state,
-          selectedPizzas: [...state.selectedPizzas, action.payload],
+          selectedPizzas: [...state.selectedPizzas, action.payload]
         };
       }
     }
@@ -62,27 +62,24 @@ export const basketReducer = (state = initialState, action) => {
     case DELETE_ONE_PIZZA_FROM_BASKET: {
       if (action.payload.doughId && action.payload.sizeId) {
         if (state.selectedPizzas.length > 0) {
-          let isEqual = checkCompare()[1];
-          let equalItemIndex = checkCompare()[0];
+          const isEqual = checkCompare()[1];
+          const equalItemIndex = checkCompare()[0];
           if (isEqual) {
             return {
               ...state,
               selectedPizzas: state.selectedPizzas.map((pizza, index) => {
                 if (equalItemIndex === index && pizza.pizzasCount > 1) {
-                  pizza.price = +(
-                    pizza.price -
-                    pizza.price / pizza.pizzasCount
-                  ).toFixed(3);
+                  pizza.price = +(pizza.price - pizza.price / pizza.pizzasCount).toFixed(3);
                   pizza.pizzasCount--;
                 }
                 return pizza;
-              }),
+              })
             };
           }
         }
         return {
           ...state,
-          selectedPizzas: [...state.selectedPizzas, action.payload],
+          selectedPizzas: [...state.selectedPizzas, action.payload]
         };
       }
     }
@@ -98,27 +95,22 @@ export const basketReducer = (state = initialState, action) => {
               return pizza;
             }
           } else return pizza;
-        }),
+        })
       };
     }
 
     case CALCULATE_TOTAL_DATA: {
       return {
         ...state,
-        totalCount: state.selectedPizzas.reduce(
-          (acc, pizza) => acc + pizza.pizzasCount,
-          0
-        ),
-        totalPrice: +state.selectedPizzas
-          .reduce((acc, pizza) => acc + pizza.price, 0)
-          .toFixed(3),
+        totalCount: state.selectedPizzas.reduce((acc, pizza) => acc + pizza.pizzasCount, 0),
+        totalPrice: +state.selectedPizzas.reduce((acc, pizza) => acc + pizza.price, 0).toFixed(3)
       };
     }
 
     case CLEAR_BASKET: {
       return {
         ...state,
-        selectedPizzas: [],
+        selectedPizzas: []
       };
     }
 

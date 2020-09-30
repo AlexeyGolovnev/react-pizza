@@ -1,86 +1,70 @@
-import React, {useEffect} from "react";
-import PizzasItem from "./PizzasItem";
+import React, {useContext, useEffect, useMemo} from 'react';
+import {useSelector} from 'react-redux';
+import {DispatchContext} from '../../context';
+import { createSelector } from 'reselect';
+import PizzasItem from './PizzasItem';
 import {
-    clearSelectedOptions,
-    getDoughTypes,
-    getPizzas,
-    getPizzaSizes,
-} from "../../redux/action";
-import {useDispatch, useSelector} from "react-redux";
-import {createSelector} from "reselect";
+  clearSelectedOptions,
+  getDoughTypes,
+  getPizzas,
+  getPizzaSizes
+} from '../../redux/action';
 
-function Pizzas() {
-    const dispatch = useDispatch();
+function Pizzas () {
+  const { dispatch } = useContext(DispatchContext);
 
-    useEffect(() => {
-        dispatch(clearSelectedOptions());
-        dispatch(getPizzas(currentSortCriterion));
-        dispatch(getDoughTypes());
-        dispatch(getPizzaSizes());
-    }, []);
+  useEffect(() => {
+    dispatch(clearSelectedOptions());
+    dispatch(getPizzas(currentSortCriterion));
+    dispatch(getDoughTypes());
+    dispatch(getPizzaSizes());
+  }, []);
 
-    const currentCategoryId = useSelector(
-        (state) => state.pizzas.currentCategory
-    );
-    const currentSortCriterionId = useSelector(
-        (state) => state.pizzas.currentSortCriterion
-    );
+  const currentCategoryId = useSelector((state) => state.filters.currentCategory);
+  const currentSortCriterionId = useSelector((state) => state.filters.currentSortCriterion);
 
-    const currentCategory = createSelector(
-        (state) => state.pizzas.categories,
-        (categories) =>
-            categories.find((category) => category.id === currentCategoryId)
-    );
+  const currentCategory = createSelector(
+    (state) => state.filters.categories,
+    (categories) => categories.find((category) => category.id === currentCategoryId));
 
-    const currentSortCriterionObj = createSelector(
-        (state) => state.pizzas.sortCriteria,
-        (sortCriteria) =>
-            sortCriteria.find(
-                (sortCriterion) => sortCriterion.id === currentSortCriterionId
-            )
-    );
-    const currentSortCriterion = useSelector(currentSortCriterionObj);
-    useEffect(() => {
-        dispatch(getPizzas(currentSortCriterion));
-    }, [currentSortCriterion]);
+  const currentSortCriterionObj = createSelector(
+    (state) => state.filters.sortCriteria,
+    (sortCriteria) => sortCriteria.find(
+      (sortCriterion) => sortCriterion.id === currentSortCriterionId));
+  const currentSortCriterion = useSelector(currentSortCriterionObj);
 
-    const filteredPizzas = createSelector(
-        (state) => state.pizzas.pizzas,
-        (pizzas) =>
-            pizzas.filter((pizza) => pizza.category.includes(currentCategoryId))
-    );
-    const pizzas = useSelector(filteredPizzas);
-    const category = useSelector(currentCategory);
+  useEffect(() => {
+    dispatch(getPizzas(currentSortCriterion));
+  }, [currentSortCriterion]);
 
-    const pizzasJsx = pizzas.map((pizza) => {
-        return (
-            <PizzasItem
-                key={pizza.id}
-                pizzaId={pizza.id}
-                imageUrl={pizza.imageUrl}
-                name={pizza.name}
-                doughs={pizza.doughs}
-                sizes={pizza.sizes}
-                price={pizza.price}
-                category={pizza.category}
-                rating={pizza.rating}
-                dispatch={dispatch}
-                currentCategory={currentCategoryId}
-                currentSortCriterion={currentSortCriterionId}
-            />
-        );
-    });
+  const filteredPizzas = createSelector(
+    (state) => state.pizzas.pizzas,
+    (pizzas) => pizzas.filter((pizza) => pizza.category.includes(currentCategoryId)));
+  const pizzas = useSelector(filteredPizzas);
+  const category = useSelector(currentCategory);
 
-    return (
-        <div className="pizzas">
-            <div className="container">
-                <div className="pizzas__inner">
-                    <h2>{category && category.name + " пиццы"} </h2>
-                    <div className="pizzas__items-box">{pizzasJsx}</div>
-                </div>
-            </div>
+  const pizzasJsx = useMemo(() => pizzas.map((pizza) => (
+    <PizzasItem
+      key={pizza.id}
+      pizzaId={pizza.id}
+      {...pizza}
+      currentCategoryId={currentCategoryId}
+      currentSortCriterionId={currentSortCriterionId}
+    />
+  )), [pizzas]);
+
+  return (
+    <div className='pizzas'>
+      <div className='container'>
+        <div className='pizzas__inner'>
+          <h2>
+            {category && `${category.name} пиццы`}
+          </h2>
+          <div className='pizzas__items-box'>{pizzasJsx}</div>
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default Pizzas;

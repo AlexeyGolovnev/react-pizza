@@ -13,6 +13,7 @@
     "axios": "^0.20.0",
     "classnames": "^2.2.6",
     "node-sass": "^4.14.1",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
@@ -33,10 +34,35 @@
     "dev": "concurrently \"npm run json-server\" \"npm start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint --fix --ext .js,.jsx ."
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "development": [
+    "last 1 chrome version",
+    "last 1 firefox version",
+    "last 1 safari version"
+  ],
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "concurrently": "^5.3.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-semistandard-react": "^4.2.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-config-standard-react": "^9.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.21.2",
+    "eslint-plugin-react-hooks": "^2.5.1",
+    "eslint-plugin-semistandard-react": "^4.1.0",
+    "eslint-plugin-standard": "^4.0.1",
+    "favicons-webpack-plugin": "^4.2.0",
+    "json-server": "^0.16.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.1.2",
+    "webpack-pwa-manifest": "^4.2.0"
   },
   "browserslist": {
     "production": [
@@ -49,12 +75,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "concurrently": "^5.3.0",
-    "favicons-webpack-plugin": "^4.2.0",
-    "json-server": "^0.16.1",
-    "npm-run-all": "^4.1.5",
-    "webpack-pwa-manifest": "^4.2.0"
   }
 }

@@ -11,21 +11,23 @@
   border-top-right-radius: 10px;
 
   &__inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include flex-setting(flex, row, space-between, center, nowrap);
     padding: 25px 0;
   }
 
   &__logo-box {
-    display: flex;
-    justify-content: space-between;
+    @include flex-setting(flex, row, space-between, center, nowrap);
     width: 100%;
   }
 
   &__logo-img-box {
     display: flex;
-
+    & > a {
+      display: flex;
+      flex-direction: row;
+      text-decoration: none;
+      color: $black;
+    }
   }
 
   &__logo-img {

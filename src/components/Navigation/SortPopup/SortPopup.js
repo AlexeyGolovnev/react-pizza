@@ -1,45 +1,54 @@
-import React, { useEffect, useState } from "react";
-import classNames from "classnames";
-import SortPopupItem from "./SortPopupItem";
+import React, {useContext, useEffect, useState} from 'react';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import SortPopupItem from './SortPopupItem';
 import {
   changeSortCriterion,
-  clearSelectedOptions,
-} from "../../../redux/action";
+  clearSelectedOptions
+} from '../../../redux/action';
+import {DispatchContext} from '../../../context';
 
-function SortPopup({ sortCriteria, dispatch, currentSortCriterion }) {
+SortPopup.propTypes = {
+  sortCriteria: PropTypes.arrayOf(PropTypes.object).isRequired,
+  currentSortCriterionId: PropTypes.number.isRequired
+};
+function SortPopup ({ sortCriteria, currentSortCriterionId }) {
+  const { dispatch } = useContext(DispatchContext);
   const [isOpen, setIsOpen] = useState(false);
   const [currentSortCriterionObj, setCurrentSortCriterionObj] = useState({});
 
   useEffect(() => {
     setCurrentSortCriterionObj(
-      sortCriteria.find((criterion) => criterion.id === currentSortCriterion)
+      sortCriteria.find((criterion) => criterion.id === currentSortCriterionId)
     );
-  }, [sortCriteria, currentSortCriterion]);
+  }, [sortCriteria, currentSortCriterionId]);
 
   const changeCriterion = (sortCriterionId) => {
     setIsOpen(!isOpen);
-    if (sortCriterionId !== currentSortCriterion) {
+    if (sortCriterionId !== currentSortCriterionId) {
       dispatch(changeSortCriterion(sortCriterionId));
       dispatch(clearSelectedOptions());
     }
   };
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  };
 
   const sortCriteriaJsx = sortCriteria.map((criterion) => {
-    return (
-      <SortPopupItem
-        key={criterion.id}
-        changeCategory={() => changeCriterion(criterion.id)}
-        text={criterion.name}
-      ></SortPopupItem>
+    return (<SortPopupItem
+      key={criterion.id}
+      changeCategory={() => changeCriterion(criterion.id)}
+      text={criterion.name}
+    />
     );
   });
   return (
-    <div className={classNames("sort", { open: isOpen })}>
-      <span className="sort__label ">Сортировка по:</span>
-      <span className="sort__name" onClick={() => setIsOpen(!isOpen)}>
+    <div className={classNames('sort', { 'open': isOpen })}>
+      <span className='sort__label'>Сортировка по:</span>
+      <span className='sort__name' onClick={togglePopup}>
         {currentSortCriterionObj && currentSortCriterionObj.name}
       </span>
-      <ul className={classNames("sort__popup", { open: isOpen })}>
+      <ul className={classNames('sort__popup', { 'open': isOpen })}>
         {sortCriteriaJsx}
       </ul>
     </div>
