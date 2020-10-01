@@ -43,9 +43,7 @@ export const basketReducer = (state = initialState, action) => {
               selectedPizzas: state.selectedPizzas.map((pizza, index) => {
                 if (equalItemIndex === index) {
                   pizza.pizzasCount++;
-                  pizza.price = +(pizza.price + action.payload.price).toFixed(
-                    3
-                  );
+                  pizza.price = +(pizza.price + action.payload.price).toFixed(2);
                 }
                 return pizza;
               })
@@ -69,7 +67,7 @@ export const basketReducer = (state = initialState, action) => {
               ...state,
               selectedPizzas: state.selectedPizzas.map((pizza, index) => {
                 if (equalItemIndex === index && pizza.pizzasCount > 1) {
-                  pizza.price = +(pizza.price - pizza.price / pizza.pizzasCount).toFixed(3);
+                  pizza.price = +(pizza.price - pizza.price / pizza.pizzasCount).toFixed(2);
                   pizza.pizzasCount--;
                 }
                 return pizza;
@@ -103,7 +101,7 @@ export const basketReducer = (state = initialState, action) => {
       return {
         ...state,
         totalCount: state.selectedPizzas.reduce((acc, pizza) => acc + pizza.pizzasCount, 0),
-        totalPrice: +state.selectedPizzas.reduce((acc, pizza) => acc + pizza.price, 0).toFixed(3)
+        totalPrice: +state.selectedPizzas.reduce((acc, pizza) => acc + pizza.price, 0).toFixed(2)
       };
     }
 

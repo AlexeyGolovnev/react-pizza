@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useContext, useEffect, useState} from 'react';
 import Button from '../Button/Button';
 import AddBtn from '../Button/AddBtn';
 import PizzasItemOptions from './PizzasItemOptions';
@@ -12,17 +12,20 @@ PizzasItem.propTypes = {
   pizzaId: PropTypes.number.isRequired,
   imageUrl: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  composition: PropTypes.string.isRequired,
   doughs: PropTypes.arrayOf(PropTypes.number).isRequired,
   sizes: PropTypes.arrayOf(PropTypes.number).isRequired,
   price: PropTypes.number.isRequired,
   currentCategoryId: PropTypes.number.isRequired,
   currentSortCriterionId: PropTypes.number.isRequired
+
 };
 
 function PizzasItem ({
   pizzaId,
   imageUrl,
   name,
+  composition,
   doughs,
   sizes,
   price,
@@ -30,6 +33,7 @@ function PizzasItem ({
   currentSortCriterionId
 }) {
   const { dispatch } = useContext(DispatchContext);
+
   const addToBasket = (e, pizzaId) => {
     e.preventDefault();
     selectedOptions.forEach((option) => {
@@ -75,6 +79,9 @@ function PizzasItem ({
     });
   }, [selectedSizes]);
 
+  useEffect(() => {
+    if (!selectedOptions.length) setCurrentPrice(0);
+  }, [selectedOptions]);
   return (
     <div className='pizzas__item'>
       <div className='pizzas__item-img-box'>
@@ -85,6 +92,7 @@ function PizzasItem ({
         />
       </div>
       <span className='pizzas__item-name'>{name}</span>
+      <span className='pizzas__item-composition'>{composition}</span>
       <PizzasItemOptions
         pizzaId={pizzaId}
         doughs={doughs}

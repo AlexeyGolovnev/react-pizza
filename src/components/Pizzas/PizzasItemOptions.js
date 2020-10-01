@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useCallback, useContext} from 'react';
 import PizzasOptionsItem from './PizzasOptionsItem';
 import {selectOptions} from '../../redux/action';
 import PropTypes from 'prop-types';
@@ -27,10 +27,10 @@ function PizzasItemOptions ({
 }) {
   const { dispatch } = useContext(DispatchContext);
 
-  const handlerOptionsSelection = (pizzaId, doughId, sizeId) => {
+  const handlerOptionsSelection = useCallback((pizzaId, doughId, sizeId) => {
     dispatch(selectOptions(pizzaId, doughId, sizeId));
     setCurrentCount(0);
-  };
+  }, []);
 
   const doughsJsx = doughTypes.map((item) => (
     <PizzasOptionsItem

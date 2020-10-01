@@ -6,7 +6,7 @@
     @include flex-setting(flex, column, center, space-between, nowrap);
     margin: 0 auto;
     padding: 20px 0;
-    max-width: 70%;
+    max-width: 80%;
   }
 
   &__header {
@@ -42,8 +42,7 @@
   }
 
   &__content {
-    @include flex-setting(flex, column, center, space-between, nowrap);
-
+   @include flex-setting(flex, column, center, space-between, nowrap);
     &-total {
       @include flex-setting(flex, row, space-between, center, nowrap);
       @include font-style(1.2rem, 500);
@@ -59,22 +58,25 @@
         }
       }
     }
+    white-space: nowrap;
   }
 
   &__item {
     @include flex-setting(flex, row, space-between, center, nowrap);
-
     padding: 10px 0;
     border-bottom: 1px solid $gray;
 
+
+
     &-img-option-box{
-      @include flex-setting(flex, row, flex-start, center, nowrap);
-      max-width: 400px;
+     @include flex-setting(flex, row, flex-start, center, nowrap);
+      max-width: 300px;
       width: 100%;
     }
 
     &-img-box {
-      width: 100px;
+      min-width: 100px;
+      max-width: 100px;
       margin-right: 10px;
     }
 
@@ -87,7 +89,7 @@
     }
 
     &-name {
-      @include font-style(1.2rem, 700);
+     @include font-style(1.2rem, 700);
     }
 
     &-option {
@@ -95,7 +97,7 @@
     }
 
     &-count-box {
-      @include flex-setting(flex, row, center, flex-start, nowrap);
+     @include flex-setting(flex, row, center, flex-start, nowrap);
     }
 
     &-icon {

@@ -111,7 +111,7 @@ function ShoppingBasket () {
                   <span>Вернуться назад</span>
                 </Button>
                 <Button basket classes='button_pay'>
-                  <span>Оплатить</span>
+                  <span>Оформить заказ</span>
                 </Button>
               </div>
             </div>

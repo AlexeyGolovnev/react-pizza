@@ -12,7 +12,7 @@
 
   &__inner {
     @include flex-setting(flex, row, space-between, center, nowrap);
-    padding: 25px 0;
+    padding: 20px 0;
   }
 
   &__logo-box {
@@ -31,7 +31,7 @@
   }
 
   &__logo-img {
-    width: 40px;
+    width: 50px;
     margin-right: 20px;
   }
 
