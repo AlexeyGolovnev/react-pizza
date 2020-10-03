@@ -13,8 +13,8 @@ PizzasItem.propTypes = {
   imageUrl: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   composition: PropTypes.string.isRequired,
-  doughs: PropTypes.arrayOf(PropTypes.number).isRequired,
-  sizes: PropTypes.arrayOf(PropTypes.number).isRequired,
+  doughs: PropTypes.arrayOf(PropTypes.object).isRequired,
+  sizes: PropTypes.arrayOf(PropTypes.object).isRequired,
   price: PropTypes.number.isRequired,
   currentCategoryId: PropTypes.number.isRequired,
   currentSortCriterionId: PropTypes.number.isRequired
@@ -33,7 +33,6 @@ function PizzasItem ({
   currentSortCriterionId
 }) {
   const { dispatch } = useContext(DispatchContext);
-
   const addToBasket = (e, pizzaId) => {
     e.preventDefault();
     selectedOptions.forEach((option) => {

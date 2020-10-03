@@ -1,9 +1,6 @@
 import {
-  getCategoriesFromApi,
-  getDoughTypesFromApi,
-  getPizzasFromApi,
-  getSizesFromApi,
-  getSortCriteriaFromApi
+  getCollectionFromFirebase,
+  getPizzasFromFirebase
 } from '../api/api';
 import {
   ADD_PIZZA_TO_BASKET,
@@ -22,54 +19,59 @@ import {
   SELECT_OPTIONS
 } from './actionTypes';
 
-export const getPizzas = (sortCriterion = { nameField: 'rating', order: 'DESC' }) =>
+export const getPizzas = (categoryId = 0, currentSortCriterion = { nameField: 'rating' }) =>
   async function (dispatch) {
-    await getPizzasFromApi(sortCriterion).then((response) => {
-      dispatch({
-        type: GET_PIZZAS,
-        pizzas: response.data
+    await getPizzasFromFirebase('pizzas', categoryId, currentSortCriterion)
+      .then((snapshot) => {
+        dispatch({
+          type: GET_PIZZAS,
+          pizzas: snapshot.docs
+        });
       });
-    });
   };
 
 export const getDoughTypes = () =>
   async function (dispatch) {
-    await getDoughTypesFromApi().then((response) => {
-      dispatch({
-        type: GET_DOUGH_TYPES,
-        doughTypes: response.data
+    await getCollectionFromFirebase('doughTypes')
+      .then((snapshot) => {
+        dispatch({
+          type: GET_DOUGH_TYPES,
+          doughTypes: snapshot.docs
+        });
       });
-    });
   };
 
 export const getPizzaSizes = () =>
   async function (dispatch) {
-    await getSizesFromApi().then((response) => {
-      dispatch({
-        type: GET_PIZZA_SIZES,
-        pizzaSizes: response.data
+    await getCollectionFromFirebase('pizzaSizes')
+      .then((snapshot) => {
+        dispatch({
+          type: GET_PIZZA_SIZES,
+          pizzaSizes: snapshot.docs
+        });
       });
-    });
   };
 
 export const getCategories = () =>
   async function (dispatch) {
-    await getCategoriesFromApi().then((response) => {
-      dispatch({
-        type: GET_CATEGORIES,
-        categories: response.data
+    await getCollectionFromFirebase('categories')
+      .then((snapshot) => {
+        dispatch({
+          type: GET_CATEGORIES,
+          categories: snapshot.docs
+        });
       });
-    });
   };
 
 export const getSortCriteria = () =>
   async function (dispatch) {
-    await getSortCriteriaFromApi().then((response) => {
-      dispatch({
-        type: GET_SORT_CRITERIA,
-        sortCriteria: response.data
+    await getCollectionFromFirebase('sortCriteria')
+      .then((snapshot) => {
+        dispatch({
+          type: GET_SORT_CRITERIA,
+          sortCriteria: snapshot.docs
+        });
       });
-    });
   };
 
 export const selectOptions = (pizzaId, doughId, sizeId) => ({

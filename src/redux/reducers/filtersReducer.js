@@ -12,15 +12,27 @@ const initialState = {
 export const filtersReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_CATEGORIES: {
+      const categories = action.categories.map(category => {
+        return {
+          id: +category.id,
+          ...category.data()
+        };
+      });
       return {
         ...state,
-        categories: action.categories
+        categories: categories
       };
     }
     case GET_SORT_CRITERIA: {
+      const sortCriteria = action.sortCriteria.map(criterion => {
+        return {
+          id: +criterion.id,
+          ...criterion.data()
+        };
+      });
       return {
         ...state,
-        sortCriteria: action.sortCriteria
+        sortCriteria: sortCriteria
       };
     }
     case CHANGE_CATEGORY: {
@@ -35,7 +47,6 @@ export const filtersReducer = (state = initialState, action) => {
         currentSortCriterion: action.sortCriterionId
       };
     }
-
     default:
       return state;
   }

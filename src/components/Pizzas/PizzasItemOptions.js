@@ -6,8 +6,8 @@ import {DispatchContext} from '../../context';
 
 PizzasItemOptions.propTypes = {
   pizzaId: PropTypes.number.isRequired,
-  doughs: PropTypes.arrayOf(PropTypes.number).isRequired,
-  sizes: PropTypes.arrayOf(PropTypes.number).isRequired,
+  doughs: PropTypes.arrayOf(PropTypes.object).isRequired,
+  sizes: PropTypes.arrayOf(PropTypes.object).isRequired,
   selectedDoughs: PropTypes.arrayOf(PropTypes.number).isRequired,
   selectedSizes: PropTypes.arrayOf(PropTypes.number).isRequired,
   setCurrentCount: PropTypes.func.isRequired,
@@ -26,16 +26,14 @@ function PizzasItemOptions ({
   doughTypes
 }) {
   const { dispatch } = useContext(DispatchContext);
-
   const handlerOptionsSelection = useCallback((pizzaId, doughId, sizeId) => {
     dispatch(selectOptions(pizzaId, doughId, sizeId));
     setCurrentCount(0);
   }, []);
-
   const doughsJsx = doughTypes.map((item) => (
     <PizzasOptionsItem
       key={item.id}
-      isDisabled={!doughs.includes(item.id)}
+      isDisabled={!doughs.map(dough => +dough.id).includes(item.id)}
       isSelected={selectedDoughs.includes(item.id)}
       text={item.name}
       handlerOptionsSelection={() => handlerOptionsSelection(pizzaId, item.id, '')}
@@ -44,7 +42,7 @@ function PizzasItemOptions ({
   const sizesJsx = pizzaSizes.map((item) => (
     <PizzasOptionsItem
       key={item.id}
-      isDisabled={!sizes.includes(item.id)}
+      isDisabled={!sizes.map(size => +size.id).includes(item.id)}
       isSelected={selectedSizes.includes(item.id)}
       text={item.size + ' см.'}
       handlerOptionsSelection={() => handlerOptionsSelection(pizzaId, '', item.id)}

@@ -1,14 +1,16 @@
-import axios from 'axios';
+import { firebaseDb } from '../firebase';
 
-const axiosInstance = axios.create({
-  baseURL: 'http://127.0.0.1:4000/'
-});
+export const getPizzasFromFirebase = (collection, categoryId, sortCriterion) => {
+  const category = getCategoryFromFirebase(categoryId);
+  return firebaseDb.collection(collection)
+    .where('category', 'array-contains', category)
+    .orderBy(sortCriterion.nameField, sortCriterion.nameField !== 'rating' ? 'asc' : 'desc')
+    .get();
+};
+export const getCategoryFromFirebase = (categoryId) => {
+  return firebaseDb.collection('categories').doc(categoryId.toString());
+};
 
-export const getPizzasFromApi = (sortCriterion) => axiosInstance.get(
-  `pizzas?_sort=${sortCriterion.nameField}&_order=${sortCriterion.order}`
-);
-
-export const getCategoriesFromApi = () => axiosInstance.get('categories');
-export const getSizesFromApi = () => axiosInstance.get('pizzaSizes');
-export const getDoughTypesFromApi = () => axiosInstance.get('doughTypes');
-export const getSortCriteriaFromApi = () => axiosInstance.get('sortCriteria');
+export const getCollectionFromFirebase = (collection) => {
+  return firebaseDb.collection(collection).get();
+};

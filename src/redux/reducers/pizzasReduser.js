@@ -16,21 +16,39 @@ const initialState = {
 export const pizzasReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_PIZZAS: {
+      const pizzas = action.pizzas.map(pizza => {
+        return {
+          id: +pizza.id,
+          ...pizza.data()
+        };
+      });
       return {
         ...state,
-        pizzas: action.pizzas
+        pizzas: pizzas
       };
     }
     case GET_DOUGH_TYPES: {
+      const doughs = action.doughTypes.map(dough => {
+        return {
+          id: +dough.id,
+          ...dough.data()
+        };
+      });
       return {
         ...state,
-        doughTypes: action.doughTypes
+        doughTypes: doughs
       };
     }
     case GET_PIZZA_SIZES: {
+      const sizes = action.pizzaSizes.map(size => {
+        return {
+          id: +size.id,
+          ...size.data()
+        };
+      });
       return {
         ...state,
-        pizzaSizes: action.pizzaSizes
+        pizzaSizes: sizes
       };
     }
     case SELECT_OPTIONS: {

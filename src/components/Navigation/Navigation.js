@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SortPopup from './SortPopup/SortPopup';
 import Categories from './Categories/Categories';
-import { getCategories, getSortCriteria } from '../../redux/action';
+import {getCategories, getSortCriteria} from '../../redux/action';
 
 function Navigation () {
   const dispatch = useDispatch();

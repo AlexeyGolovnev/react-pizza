@@ -16,7 +16,6 @@ function SortPopup ({ sortCriteria, currentSortCriterionId }) {
   const { dispatch } = useContext(DispatchContext);
   const [isOpen, setIsOpen] = useState(false);
   const [currentSortCriterionObj, setCurrentSortCriterionObj] = useState({});
-
   useEffect(() => {
     setCurrentSortCriterionObj(
       sortCriteria.find((criterion) => criterion.id === currentSortCriterionId)

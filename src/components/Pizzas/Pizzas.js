@@ -12,10 +12,9 @@ import {
 
 function Pizzas () {
   const { dispatch } = useContext(DispatchContext);
-
   useEffect(() => {
     dispatch(clearSelectedOptions());
-    dispatch(getPizzas(currentSortCriterion));
+    dispatch(getPizzas(currentCategoryId, currentSortCriterion));
     dispatch(getDoughTypes());
     dispatch(getPizzaSizes());
   }, []);
@@ -23,25 +22,21 @@ function Pizzas () {
   const currentCategoryId = useSelector((state) => state.filters.currentCategory);
   const currentSortCriterionId = useSelector((state) => state.filters.currentSortCriterion);
 
-  const currentCategory = createSelector(
+  const currentCategoryObj = createSelector(
     (state) => state.filters.categories,
     (categories) => categories.find((category) => category.id === currentCategoryId));
 
   const currentSortCriterionObj = createSelector(
     (state) => state.filters.sortCriteria,
-    (sortCriteria) => sortCriteria.find(
-      (sortCriterion) => sortCriterion.id === currentSortCriterionId));
+    (sortCriteria) => sortCriteria.find((sortCriterion) => sortCriterion.id === currentSortCriterionId));
+
   const currentSortCriterion = useSelector(currentSortCriterionObj);
+  const currentCategory = useSelector(currentCategoryObj);
+  const pizzas = useSelector(state => state.pizzas.pizzas);
 
   useEffect(() => {
-    dispatch(getPizzas(currentSortCriterion));
-  }, [currentSortCriterion]);
-
-  const filteredPizzas = createSelector(
-    (state) => state.pizzas.pizzas,
-    (pizzas) => pizzas.filter((pizza) => pizza.category.includes(currentCategoryId)));
-  const pizzas = useSelector(filteredPizzas);
-  const category = useSelector(currentCategory);
+    dispatch(getPizzas(currentCategoryId, currentSortCriterion));
+  }, [currentCategoryId, currentSortCriterion]);
 
   const pizzasJsx = useMemo(() => pizzas.map((pizza) => (
     <PizzasItem
@@ -58,7 +53,7 @@ function Pizzas () {
       <div className='container'>
         <div className='pizzas__inner'>
           <h2>
-            {category && `${category.name} пиццы`}
+            {currentCategory && `${currentCategory.name} пиццы`}
           </h2>
           <div className='pizzas__items-box'>{pizzasJsx}</div>
         </div>
