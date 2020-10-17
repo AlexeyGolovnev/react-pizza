@@ -18,7 +18,6 @@ PizzasItem.propTypes = {
   price: PropTypes.number.isRequired,
   currentCategoryId: PropTypes.number.isRequired,
   currentSortCriterionId: PropTypes.number.isRequired
-
 };
 
 function PizzasItem ({

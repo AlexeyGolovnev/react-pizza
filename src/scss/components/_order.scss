@@ -1,0 +1,134 @@
+@import './../mixins';
+@import "./../variables";
+.order {
+  &__inner {
+    @include flex-setting(flex,column, center,center,nowrap);
+    padding: 50px 0;
+    text-align: center;
+  }
+  &__header {
+    @include flex-setting(flex,row, space-between,center,nowrap);
+    width: 100%;
+    margin-bottom: 25px;
+
+  }
+  &__title {
+   @include font-style(2rem, 600);
+  }
+  &__substitution{
+    color:$orange;
+    cursor: pointer;
+    &:hover {
+      border-bottom: 1px solid $orange;
+    }
+  }
+  &__form {
+    display:grid;
+    grid-template-columns: repeat(3, minmax(100px,1fr));
+    grid-gap: 20px;
+    &>input, &>textarea {
+      @include font-style(1.3rem, 500);
+      padding: 8px;
+      border:1px solid #cbcbcb;
+      border-radius: 10px;
+    }
+    &>input:focus, &>textarea:focus {
+      border-color:$orange;
+      //@include font-style(1.3rem, 600);
+    }
+    &>input:nth-child(1) {
+      grid-area: 1 / 1 / 1 / 3;
+    }
+    &>input:nth-child(2) {
+      grid-area: 1 / 3 / 1 / 4;
+    }
+    &>input:nth-child(3) {
+      grid-area: 2 / 1 / 2 / 1;
+    }
+    &>input:nth-child(4) {
+      grid-area: 2 / 2 / 2 / 3;
+    }
+    &>input:nth-child(5) {
+      grid-area: 2 / 3 / 2 / 4;
+    }
+    &>input:nth-child(6) {
+      grid-area: 3 / 1 / 3 / 3;
+    }
+    &>input:nth-child(7) {
+      grid-area: 3 / 3 / 3 / 3;
+    }
+    &>textarea {
+      resize:none;
+      grid-area: 4 / 1 / 4 / 4;
+    }
+    &>div {
+      grid-area: 5 / 1 / 5 / 4;
+      @include flex-setting(flex,row,space-between,center,nowrap);
+      &>button {
+        background: $orange;
+        border-radius: 25px;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        color:#fff;
+        @include font-style(1rem, 400);
+        &:hover {
+          background:#e4551b;
+        }
+      }
+    }
+  }
+
+  &__modal-overlay {
+    position:fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    @include flex-setting(flex,row,center,center,nowrap);
+    background: rgba(50,50,50,.3);
+    z-index: 1000;
+
+  }
+  &__modal-window {
+    @include flex-setting(flex,column,flex-start,center,nowrap);
+    border-radius: 15px;
+    width: 350px;
+    height: 150px;
+    background: #fff;
+
+  }
+  &__modal-header {
+    @include flex-setting(flex,row,space-between,center,nowrap);
+    width: 100%;
+    height: 50px;
+    padding: 15px;
+    border-bottom: 1px solid #cbcbcb;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background: $orange;
+
+  }
+  &__modal-title {
+    @include font-style(1.4rem,500);
+    color:#fff;
+  }
+  &__modal-close {
+    @include font-style(4rem,500);
+    color:#fff;
+    line-height: 0;
+    cursor: pointer;
+    transition: color 0.1s linear;
+    &:hover {
+      color:#000;
+    }
+  }
+  &__modal-body {
+    @include flex-setting(flex,row,center,center,nowrap);
+    height: 100%;
+    padding: 15px;
+  }
+  &__modal-msg {
+    @include font-style(1.2rem,500);
+  }
+}

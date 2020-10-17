@@ -75,7 +75,7 @@ function ShoppingBasket () {
               <span>Вероятнее всего, вы не заказывали пиццу.</span>
               <span>Для того, чтобы заказать пиццу, перейдите на главную страницу.</span>
               <img className='basket__empty-img' src={emptyCart} alt=' ' />
-              <Button outline back classes='button_back'>
+              <Button outline path='/' classes='button_back'>
                 <FontAwesomeIcon icon={faArrowLeft} />
                 <span>Вернуться назад</span>
               </Button>
@@ -106,11 +106,11 @@ function ShoppingBasket () {
                 </div>
               </div>
               <div className='basket__footer'>
-                <Button outline back classes='button_back'>
+                <Button outline path='/' classes='button_back'>
                   <FontAwesomeIcon icon={faArrowLeft} />
                   <span>Вернуться назад</span>
                 </Button>
-                <Button basket classes='button_pay'>
+                <Button path='/order' classes='button_basket button_pay' >
                   <span>Оформить заказ</span>
                 </Button>
               </div>

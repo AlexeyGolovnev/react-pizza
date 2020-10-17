@@ -1,0 +1,100 @@
+@import './../variables';
+@import './../mixins';
+
+.authForm {
+  @include flex-setting(flex,column,flex-start,center,nowrap);
+  width: 100%;
+  &__inner {
+    width: 50%;
+    padding: 50px;
+    box-shadow: 0 0 10px 1px #f6f6f6;
+    border-radius: 5px;
+  }
+  &__title-box {
+    @include flex-setting(flex,column,center,center,nowrap);
+    min-height: 100px;
+
+    &>span {
+      margin-top: 10px;
+      color:#e41b1b;
+    }
+  }
+  &__title {
+      font-size: 1.8rem;
+  }
+  &__forms-box {
+    @include flex-setting(flex,row,center,center,nowrap);
+    min-height: 100px;
+  }
+  & input {
+    @include font-style(1.4rem, 400);
+    padding:5px;
+    border:1px solid #cbcbcb;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 5px;
+    &:focus {
+      border-color: $orange;
+    }
+  }
+  & button {
+    margin-top: 10px;
+    background: $orange;
+    border-radius: 25px;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    color:#fff;
+    @include font-style(1rem, 400);
+    &:hover {
+      background:#e4551b;
+    }
+  }
+  &__error {
+    @include font-style(0.9rem, 500);
+    color:#e41b1b;
+    text-align: center;
+  }
+  &__phone-form-box {
+    @include flex-setting(flex,column,center,center,nowrap);
+  }
+  &__phone-form {
+    @include flex-setting(flex,column,center,flex-end,nowrap);
+    width: 100%;
+    &>div {
+      @include flex-setting(flex,row,center,center,nowrap);
+      &>label {
+        @include font-style(1.3rem, 400);
+        margin-right: 10px;
+      }
+    }
+
+  }
+  &__verificationCode-form-box {
+    width: 100%;
+  }
+  &__verificationCode-form {
+    @include flex-setting(flex,column,center,center,nowrap);
+  }
+  &__codeTimer {
+    @include font-style(0.9rem, 500);
+    color:#cbcbcb;
+    margin: 5px 0;
+  }
+  &__changeNumber {
+    @include font-style(0.9rem, 500);
+    color:#cbcbcb;
+    margin-top: 10px;
+    text-decoration: underline;
+    cursor: pointer;
+    &:hover {
+      color:#000;
+    }
+  }
+  &__codeInput {
+    width:150px;
+  }
+}
+#recaptcha-container {
+  display:none;
+}

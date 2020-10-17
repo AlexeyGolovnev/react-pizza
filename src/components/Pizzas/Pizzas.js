@@ -3,12 +3,14 @@ import {useSelector} from 'react-redux';
 import {DispatchContext} from '../../context';
 import { createSelector } from 'reselect';
 import PizzasItem from './PizzasItem';
+import { PizzaItemLoader } from '../Loaders/PizzaItemLoader';
 import {
   clearSelectedOptions,
   getDoughTypes,
   getPizzas,
   getPizzaSizes
 } from '../../redux/action';
+import {RectangleLoader} from '../Loaders/RectangleLoader';
 
 function Pizzas () {
   const { dispatch } = useContext(DispatchContext);
@@ -33,7 +35,10 @@ function Pizzas () {
   const currentSortCriterion = useSelector(currentSortCriterionObj);
   const currentCategory = useSelector(currentCategoryObj);
   const pizzas = useSelector(state => state.pizzas.pizzas);
-
+  useEffect(() => {
+    console.log(pizzas);
+    !pizzas.length && console.log('EMPTY');
+  }, [pizzas]);
   useEffect(() => {
     dispatch(getPizzas(currentCategoryId, currentSortCriterion));
   }, [currentCategoryId, currentSortCriterion]);
@@ -47,15 +52,20 @@ function Pizzas () {
       currentSortCriterionId={currentSortCriterionId}
     />
   )), [pizzas]);
-
   return (
     <div className='pizzas'>
       <div className='container'>
         <div className='pizzas__inner'>
-          <h2>
-            {currentCategory && `${currentCategory.name} пиццы`}
-          </h2>
-          <div className='pizzas__items-box'>{pizzasJsx}</div>
+          {pizzasJsx.length
+            ? <h2>{currentCategory && `${currentCategory.name} пиццы`}</h2>
+            : <RectangleLoader />
+          }
+          <div className='pizzas__items-box'>
+            {pizzasJsx.length
+              ? pizzasJsx
+              : (<> <PizzaItemLoader /> <PizzaItemLoader /> <PizzaItemLoader /> </>)
+            }
+          </div>
         </div>
       </div>
     </div>

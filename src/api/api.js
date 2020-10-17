@@ -14,3 +14,10 @@ export const getCategoryFromFirebase = (categoryId) => {
 export const getCollectionFromFirebase = (collection) => {
   return firebaseDb.collection(collection).get();
 };
+
+export const getUserProfileFromFirebase = (userId) => {
+  return firebaseDb.collection('users').doc(userId).get();
+};
+export const updateUserProfileInFirebase = (userId, userData) => {
+  return firebaseDb.collection('users').doc(userId).set({ ...userData });
+};

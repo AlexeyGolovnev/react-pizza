@@ -16,7 +16,7 @@ function Navigation () {
   const currentCategory = useSelector((state) => state.filters.currentCategory);
   const currentSortCriterion = useSelector((state) => state.filters.currentSortCriterion);
   const sortCriteria = useSelector((state) => state.filters.sortCriteria);
-
+  const pizzasCount = useSelector((state) => state.pizzas.pizzas.length);
   return (
     <div className='navigation'>
       <div className='container'>
@@ -24,10 +24,12 @@ function Navigation () {
           <Categories
             categories={categories}
             currentCategoryId={currentCategory}
+            pizzasCount={pizzasCount}
           />
           <SortPopup
             sortCriteria={sortCriteria}
             currentSortCriterionId={currentSortCriterion}
+            pizzasCount={pizzasCount}
           />
         </div>
       </div>

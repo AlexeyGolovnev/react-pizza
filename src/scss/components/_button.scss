@@ -3,17 +3,18 @@
 
 .button {
   @include flex-setting(flex, row, space-between, center, nowrap);
-  border-radius: 25px;
   padding: 0 15px;
   transition: background-color $duration linear;
 
   &_basket {
+    @include flex-setting(flex,row,center,center,nowrap);
+    border-radius: 25px;
     color: #fff;
     background-color: $orange;
     height: 50px;
     padding: 0 20px;
     white-space: nowrap;
-
+    margin-right: 20px;
     &:hover {
       background-color: #e4551b;
     }
@@ -35,10 +36,16 @@
         font-size: 14px;
       }
     }
+    @media (max-width: 700px) {
+      & {
+        height: 40px;
+      }
+    }
   }
 
   &_add {
     border: 1px solid $orange;
+    border-radius: 25px;
     background-color: #fff;
     color: $orange;
     height: 40px;
@@ -75,8 +82,10 @@
   }
 
   &_back {
+    @include flex-setting(flex,row,center,center,nowrap);
     color: #777777;
     border: 1px solid #777777;
+    border-radius: 25px;
     transition: background-color $duration linear;
 
     &:hover {
@@ -89,8 +98,12 @@
   }
 
   &_pay {
-    padding: 0 20px;
     height: 40px;
+    margin:0;
   }
 
+  &_signIn {
+    width: 70px;
+    text-align: center;
+  }
 }

@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import CategoryItem from './CategoryItem';
 import { changeCategory, clearSelectedOptions } from '../../../redux/action';
 import {DispatchContext} from '../../../context';
+import {RectangleLoader} from '../../Loaders/RectangleLoader';
 
 Categories.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
-  currentCategoryId: PropTypes.number.isRequired
+  currentCategoryId: PropTypes.number.isRequired,
+  pizzasCount: PropTypes.number.isRequired
 };
 
-function Categories ({ categories, currentCategoryId }) {
+function Categories ({ categories, currentCategoryId, pizzasCount }) {
   const { dispatch } = useContext(DispatchContext);
 
   const selectCategory = (categoryId) => {
@@ -29,7 +31,15 @@ function Categories ({ categories, currentCategoryId }) {
   ));
   return (
     <div className='categories'>
-      {categoriesJsx}
+      {pizzasCount > 0
+        ? categoriesJsx
+        : <>
+          <RectangleLoader />
+          <RectangleLoader />
+          <RectangleLoader />
+          <RectangleLoader />
+        </>
+      }
     </div>
   );
 }

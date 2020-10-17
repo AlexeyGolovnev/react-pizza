@@ -1,0 +1,59 @@
+@import  '../variables';
+@import "../mixins";
+.user-profile {
+  padding: 25px;
+  &__inner {
+    @include flex-setting(flex,column,center,flex-start,nowrap);
+    padding: 50px;
+    box-shadow: 0 0 10px 1px #f6f6f6;
+    border-radius: 5px;
+  }
+  &__title {
+    @include font-style(2rem, 700);
+    margin-bottom: 15px;
+  }
+  &__subtitle {
+    @include font-style(1.5rem, 700);
+    margin-bottom: 30px;
+  }
+  &__form {
+    display:grid;
+    grid-template-columns: repeat(1,minmax(250px,350px));
+    &>div{
+      @include flex-setting(flex,row,space-between,center,nowrap);
+      width: 100%;
+      margin-bottom: 20px;
+      &>label {
+        display:block;
+       // min-width: 50%;
+        @include font-style(1.2rem, 700);
+        margin-right: 20px;
+      }
+      &>input {
+        @include font-style(1.2rem, 400);
+        width: 70%;
+        border:1px solid #cbcbcb;;
+        border-radius: 5px;
+        padding:5px 5px;
+        &:focus {
+          border-color:$orange;
+        }
+      }
+      &>button {
+        background: $orange;
+        border-radius: 25px;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        color:#fff;
+        @include font-style(1rem, 400);
+        &:hover {
+          background:#e4551b;
+        }
+      }
+    }
+  }
+  &__btn-box {
+    @include flex-setting(flex,row,space-between,center,nowrap);
+  }
+}

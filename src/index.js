@@ -7,8 +7,12 @@ import { rootReducer } from './redux/rootReducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import App from './App';
+import firebase from 'firebase';
+import { config } from './firebase-config';
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+
+firebase.initializeApp(config);
 
 ReactDOM.render(
   <React.StrictMode>

@@ -4,25 +4,42 @@
 .categories {
   @include flex-setting(flex, row, flex-start, center, wrap);
   margin-right: 50px;
-  padding-top: 10px;
   &__item {
     @include flex-setting(flex, row, center, center, nowrap);
-    @include font-style(0.9rem, bold);
+    @include font-style(1rem, bold);
     cursor: pointer;
     background-color: $gray;
     padding: 10px 20px;
     border-radius: 20px;
     color: $black;
     transition: background-color $duration linear;
-    margin: 0 10px 10px 0;
+    margin: 0 10px 0 0;
     &:hover {
       background-color: $black;
       color: #fff;
     }
-
     &.current {
       background-color: $black;
       color: #fff;
+    }
+
+    @media (max-width: 1024px) {
+      & {
+        margin-bottom: 10px;
+      }
+    }
+    @media (max-width: 550px) {
+      & {
+        @include font-style(0.9rem, bold);
+        padding: 5px 10px;
+        align-items: flex-start;
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    & {
+      margin: 0 0 10px 0;
+      justify-content: center;
     }
   }
 }

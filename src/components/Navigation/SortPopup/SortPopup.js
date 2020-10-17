@@ -8,11 +8,14 @@ import {
 } from '../../../redux/action';
 import {DispatchContext} from '../../../context';
 
+import {RectangleLoader} from '../../Loaders/RectangleLoader';
+
 SortPopup.propTypes = {
   sortCriteria: PropTypes.arrayOf(PropTypes.object).isRequired,
-  currentSortCriterionId: PropTypes.number.isRequired
+  currentSortCriterionId: PropTypes.number.isRequired,
+  pizzasCount: PropTypes.number.isRequired
 };
-function SortPopup ({ sortCriteria, currentSortCriterionId }) {
+function SortPopup ({ sortCriteria, currentSortCriterionId, pizzasCount }) {
   const { dispatch } = useContext(DispatchContext);
   const [isOpen, setIsOpen] = useState(false);
   const [currentSortCriterionObj, setCurrentSortCriterionObj] = useState({});
@@ -34,22 +37,29 @@ function SortPopup ({ sortCriteria, currentSortCriterionId }) {
   };
 
   const sortCriteriaJsx = sortCriteria.map((criterion) => {
-    return (<SortPopupItem
-      key={criterion.id}
-      changeCategory={() => changeCriterion(criterion.id)}
-      text={criterion.name}
-    />
+    return (
+      <SortPopupItem
+        key={criterion.id}
+        changeCategory={() => changeCriterion(criterion.id)}
+        text={criterion.name}
+      />
     );
   });
   return (
     <div className={classNames('sort', { 'open': isOpen })}>
-      <span className='sort__label'>Сортировка по:</span>
-      <span className='sort__name' onClick={togglePopup}>
-        {currentSortCriterionObj && currentSortCriterionObj.name}
-      </span>
-      <ul className={classNames('sort__popup', { 'open': isOpen })}>
-        {sortCriteriaJsx}
-      </ul>
+      {pizzasCount > 0
+        ? <>
+          <span className='sort__label'>Сортировка по:</span>
+          <span className='sort__name' onClick={togglePopup}>
+            {currentSortCriterionObj && currentSortCriterionObj.name}
+          </span>
+          <ul className={classNames('sort__popup', { 'open': isOpen })}>
+            {sortCriteriaJsx}
+          </ul>
+        </>
+        : <RectangleLoader />
+      }
+
     </div>
   );
 }

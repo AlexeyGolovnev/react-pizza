@@ -13,11 +13,23 @@
   &__inner {
     @include flex-setting(flex, row, space-between, center, nowrap);
     padding: 20px 0;
+    @media (max-width: 700px) {
+      & {
+        flex-direction: column;
+        justify-content: center;
+      }
+    }
   }
 
   &__logo-box {
     @include flex-setting(flex, row, space-between, center, nowrap);
     width: 100%;
+    @media (max-width: 700px) {
+      & {
+        justify-content: center;
+        margin-bottom: 15px;
+      }
+    }
   }
 
   &__logo-img-box {
@@ -34,7 +46,6 @@
     width: 50px;
     margin-right: 20px;
   }
-
   &__logo-text-box {
     display: flex;
     flex-direction: column;
@@ -44,9 +55,17 @@
     @include font-style(1.5rem, 800);
     text-transform: uppercase;
   }
-
   &__logo-subtitle {
     text-transform: lowercase;
     color: #7b7b7b;
+  }
+  &__btn-box {
+    width: 100%;
+    @include flex-setting(flex, row, flex-end, center, nowrap);
+    @media (max-width: 700px) {
+      & {
+        justify-content: center;
+      }
+    }
   }
 }

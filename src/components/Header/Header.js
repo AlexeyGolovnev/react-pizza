@@ -8,6 +8,7 @@ import BasketBtn from '../Button/BasketBtn';
 function Header () {
   const totalCount = useSelector((state) => state.basket.totalCount);
   const totalPrice = useSelector((state) => state.basket.totalPrice);
+  const user = useSelector((state) => state.user);
   return (
     <header className='header'>
       <div className='container'>
@@ -23,15 +24,24 @@ function Header () {
               </Link>
             </div>
           </div>
-          <Button
-            basket
-            children={(
-              <BasketBtn
-                totalCount={totalCount}
-                totalPrice={totalPrice}
-              />
-            )}
-          />
+          <div className='header__btn-box'>
+            <Button
+              basket
+              path='/basket'
+              children={(
+                <BasketBtn
+                  totalCount={totalCount}
+                  totalPrice={totalPrice}
+                />
+              )}
+            />
+            <Button
+              outline
+              path={!user.id ? '/auth' : '/user'}
+              children={<span className='button_signIn'> {user.id ? 'Кабинет' : 'Вход'} </span>}
+            />
+          </div>
+
         </div>
       </div>
     </header>

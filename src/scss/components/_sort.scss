@@ -5,7 +5,12 @@
   position: relative;
   @include flex-setting(flex, row, center, center, nowrap);
   min-width: 250px;
-
+  @media (max-width: 550px) {
+    & {
+      @include font-style(0.9rem, 400);
+      padding: 5px 10px;
+    }
+  }
   &__label {
     position: relative;
     margin-right: 5px;

@@ -1,6 +1,6 @@
 import {
   getCollectionFromFirebase,
-  getPizzasFromFirebase
+  getPizzasFromFirebase, getUserProfileFromFirebase, updateUserProfileInFirebase
 } from '../api/api';
 import {
   ADD_PIZZA_TO_BASKET,
@@ -15,8 +15,8 @@ import {
   GET_DOUGH_TYPES,
   GET_PIZZA_SIZES,
   GET_PIZZAS,
-  GET_SORT_CRITERIA,
-  SELECT_OPTIONS
+  GET_SORT_CRITERIA, GET_USER_PROFILE, SAVE_USER_PROFILE,
+  SELECT_OPTIONS, SIGN_OUT
 } from './actionTypes';
 
 export const getPizzas = (categoryId = 0, currentSortCriterion = { nameField: 'rating' }) =>
@@ -133,3 +133,30 @@ export const deletePizzaFromBasket = (pizzaId, doughId, sizeId) => ({
 export const calculateTotalData = () => ({
   type: CALCULATE_TOTAL_DATA
 });
+
+export const getUserProfile = (userId) =>
+  async function (dispatch) {
+    await getUserProfileFromFirebase(userId).then(doc => {
+      if (doc.exists) {
+        dispatch({
+          type: GET_USER_PROFILE,
+          user: { id: userId, ...doc.data() }
+        });
+      }
+    });
+  };
+export const saveUserProfile = (userId, newUserProfile) =>
+  async function (dispatch) {
+    await updateUserProfileInFirebase(userId, newUserProfile)
+      .then(() => {
+        dispatch({
+          type: SAVE_USER_PROFILE
+        });
+      });
+  };
+
+export const signOut = () => {
+  return {
+    type: SIGN_OUT
+  };
+};

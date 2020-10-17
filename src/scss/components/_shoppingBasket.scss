@@ -2,15 +2,17 @@
 @import "./../mixins";
 
 .basket {
+  min-width: 100%;
   &__inner {
-    @include flex-setting(flex, column, center, space-between, nowrap);
+    @include flex-setting(flex, column, flex-start, center, nowrap);
     margin: 0 auto;
-    padding: 20px 0;
+    padding: 50px 0;
     max-width: 80%;
   }
 
   &__header {
     @include flex-setting(flex, row, space-between, center, nowrap);
+    width: 100%;
     padding: 0 0 20px 0;
     border-bottom: 1px solid $gray;
 
@@ -43,15 +45,11 @@
 
   &__content {
    @include flex-setting(flex, column, center, space-between, nowrap);
+    width: 100%;
     &-total {
       @include flex-setting(flex, row, space-between, center, nowrap);
       @include font-style(1.2rem, 500);
       margin-top: 10px;
-
-      &-count {
-
-      }
-
       &-price {
         & > b {
           color: $orange;
@@ -144,13 +142,14 @@
 
   &__footer {
     @include flex-setting(flex, row, space-between, center, nowrap);
+    width: 100%;
     margin-top: 20px;
   }
 
 
 
   &__empty-inner {
-    padding: 100px 0;
+    padding: 50px 0;
     @include flex-setting(flex, column, center, center, nowrap);
     &>h2 {
       margin-bottom: 10px;

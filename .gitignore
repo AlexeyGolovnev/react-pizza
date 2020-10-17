@@ -5,9 +5,13 @@
 /.pnp
 .pnp.js
 .eslintrc
-./src/firebase.js
 .firebaserc
-
+/src/firebase.js
+/src/firebase-config.js
+firebase.json
+firestore.indexes.json
+firestore.rules
+storage.rules
 # testing
 /coverage
 

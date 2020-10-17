@@ -6,7 +6,7 @@
 body {
   background-color: $background;
   max-width: 1440px;
-  padding: 45px;
+  padding: 40px;
   font-size: 16px;
   @include noselect;
   margin: 0 auto;
@@ -23,8 +23,22 @@ body {
 .container {
   padding: 0 50px;
   min-width: $container-width;
+  @media (max-width: 768px) {
+    padding: 0 20px;
+  }
+  @media (max-width: 550px) {
+    padding: 0 10px;
+  }
+  @media (max-width: 375px) {
+    padding: 0;
+  }
 }
 main {
-  @include flex-setting(flex,column,center,space-between,nowrap);
-  min-height: 50vh;
+  @include flex-setting(flex,column,center,center,nowrap);
+  min-height: 70vh;
 }
+.disabled {
+  color: $disabled;
+  cursor: inherit;
+}
+
