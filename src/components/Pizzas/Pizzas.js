@@ -35,10 +35,7 @@ function Pizzas () {
   const currentSortCriterion = useSelector(currentSortCriterionObj);
   const currentCategory = useSelector(currentCategoryObj);
   const pizzas = useSelector(state => state.pizzas.pizzas);
-  useEffect(() => {
-    console.log(pizzas);
-    !pizzas.length && console.log('EMPTY');
-  }, [pizzas]);
+  
   useEffect(() => {
     dispatch(getPizzas(currentCategoryId, currentSortCriterion));
   }, [currentCategoryId, currentSortCriterion]);
