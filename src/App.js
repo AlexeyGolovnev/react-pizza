@@ -1,10 +1,10 @@
 import React, { Suspense, lazy } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { DispatchContext } from './context';
-import './scss/app.scss';
+import { useDispatch } from 'react-redux';
 import Header from './components/Header/Header';
 import Spinner from './components/Spinner/Spinner';
-import { useDispatch } from 'react-redux';
+import './scss/app.scss';
 
 const Main = lazy(() => import('./pages/Main'));
 const Basket = lazy(() => import('./pages/Basket'));
