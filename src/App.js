@@ -16,20 +16,22 @@ export default function App () {
   const dispatch = useDispatch();
   return (
     <DispatchContext.Provider value={{ dispatch }} >
-      <div className='app-wrapper'>
-        <Header />
-        <main>
-          <Switch>
-            <Suspense fallback={<Spinner />}>
-              <Route exact path='/' component={Main} />
-              <Route exact path='/basket' component={Basket} />
-              <Route exact path='/auth' component={Auth} />
-              <Route exact path='/user' component={User} />
-              <Route exact path='/order' component={Order} />
-            </Suspense>
-          </Switch>
-        </main>
-      </div>
+      <Header />
+      <main>
+        <Switch>
+          <Suspense fallback={ 
+            <div className = 'spinner-box'>
+              <Spinner />
+            </div>
+          }>
+            <Route exact path='/' component={Main} />
+            <Route exact path='/basket' component={Basket} />
+            <Route exact path='/auth' component={Auth} />
+            <Route exact path='/user' component={User} />
+            <Route exact path='/order' component={Order} />
+          </Suspense>
+        </Switch>
+      </main>
     </DispatchContext.Provider>
   );
 }

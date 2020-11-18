@@ -1,8 +1,8 @@
 import React, {useContext, useEffect, useMemo} from 'react';
-import {useSelector} from 'react-redux';
-import {DispatchContext} from '../../context';
-import { createSelector } from 'reselect';
 import PizzasItem from './PizzasItem';
+import { useSelector } from 'react-redux';
+import { DispatchContext } from '../../context';
+import { createSelector } from 'reselect';
 import { PizzaItemLoader } from '../Loaders/PizzaItemLoader';
 import {
   clearSelectedOptions,
@@ -10,7 +10,7 @@ import {
   getPizzas,
   getPizzaSizes
 } from '../../redux/action';
-import {RectangleLoader} from '../Loaders/RectangleLoader';
+import { RectangleLoader } from '../Loaders/RectangleLoader';
 
 function Pizzas () {
   const { dispatch } = useContext(DispatchContext);

@@ -1,14 +1,14 @@
-import React, {useContext, useEffect, useMemo} from 'react';
+import React, { useContext, useEffect, useMemo } from 'react';
 import ShoppingBasketItem from './ShoppingBasketItem';
+import emptyCart from '../../assets/img/empty-cart.png';
+import Button from '../Button/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { faShoppingBasket, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import emptyCart from '../../assets/img/empty-cart.png';
-import Button from '../Button/Button';
 import { useSelector } from 'react-redux';
 import { v1 } from 'uuid';
 import { addPizzaToBasket, calculateTotalData, clearBasket, deleteOnePizzaFromBasket, deletePizzaFromBasket } from '../../redux/action';
-import {DispatchContext} from '../../context';
+import { DispatchContext } from '../../context';
 
 function ShoppingBasket () {
   const { dispatch } = useContext(DispatchContext);

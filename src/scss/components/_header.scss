@@ -5,11 +5,12 @@
   position: sticky;
   top:0;
   z-index: 1000;
+  width:100%;
   background-color: #fff;
-  border-bottom: 1px solid #f6f6f6;
+  border-bottom: 1px solid #ccc;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-
+  min-height: 90px;
   &__inner {
     @include flex-setting(flex, row, space-between, center, nowrap);
     padding: 20px 0;
