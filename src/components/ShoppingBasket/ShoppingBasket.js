@@ -71,13 +71,13 @@ function ShoppingBasket () {
         {selectedPizzas.length === 0
           ? (
             <div className='basket__empty-inner'>
-              <h2>Корзина пуста :(</h2>
-              <span>Вероятнее всего, вы не заказывали пиццу.</span>
-              <span>Для того, чтобы заказать пиццу, перейдите на главную страницу.</span>
+              <h2>Cart is empty :(</h2>
+              <span>Most likely you did not order pizza.</span>
+              <span>To order pizza, go to the home page.</span>
               <img className='basket__empty-img' src={emptyCart} alt=' ' />
               <Button outline path='/' classes='button_back'>
                 <FontAwesomeIcon icon={faArrowLeft} />
-                <span>Вернуться назад</span>
+                <span>Back to Home Page</span>
               </Button>
             </div>
           )
@@ -86,32 +86,32 @@ function ShoppingBasket () {
               <div className='basket__header'>
                 <div className='basket__header-left-part'>
                   <FontAwesomeIcon icon={faShoppingBasket} />
-                  <span>Корзина</span>
+                  <span>Cart</span>
                 </div>
                 <div className='basket__header-right-part'>
                   <FontAwesomeIcon icon={faTrashAlt} />
                   <span onClick={() => dispatch(clearBasket())}>
-                    Очистить корзину
+                    Clear cart
                   </span>
                 </div>
               </div>
               <div className='basket__content'>
                 <ul>{selectedPizzasJsx}</ul>
                 <div className='basket__content-total'>
-                  <span className='basket__content-total-count'>Всего пицц: <b>{totalCount} шт</b>.
+                  <span className='basket__content-total-count'>Total: <b>{totalCount} items</b>
                   </span>
                   <span className='basket__content-total-price'>
-                    Сумма заказа: <b>{totalPrice} руб</b>.
+                    Order price: <b>{totalPrice} $</b>
                   </span>
                 </div>
               </div>
               <div className='basket__footer'>
                 <Button outline path='/' classes='button_back'>
                   <FontAwesomeIcon icon={faArrowLeft} />
-                  <span>Вернуться назад</span>
+                  <span>Back to Home Page</span>
                 </Button>
                 <Button path='/order' classes='button_basket button_pay' >
-                  <span>Оформить заказ</span>
+                  <span>Order checkout</span>
                 </Button>
               </div>
             </div>

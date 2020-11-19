@@ -1,9 +1,9 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import CategoryItem from './CategoryItem';
 import { changeCategory, clearSelectedOptions } from '../../../redux/action';
-import {DispatchContext} from '../../../context';
-import {RectangleLoader} from '../../Loaders/RectangleLoader';
+import { DispatchContext } from '../../../context';
+import { RectangleLoader } from '../../Loaders/RectangleLoader';
 
 Categories.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,

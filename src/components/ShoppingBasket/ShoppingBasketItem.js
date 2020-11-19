@@ -25,7 +25,7 @@ function ShoppingBasketItem ({ img, name, dough, size, count, price, addPizza, d
         </div>
         <div className='basket__item-option-box'>
           <span className='basket__item-name'>{name}</span>
-          <span className='basket__item-option'>{dough} тесто, {size} см.</span>
+          <span className='basket__item-option'>{dough} dough, {size} cm.</span>
         </div>
       </div>
 
@@ -34,7 +34,7 @@ function ShoppingBasketItem ({ img, name, dough, size, count, price, addPizza, d
         <span className='basket__item-count'>{count}</span>
         <FontAwesomeIcon icon={faPlus} className='basket__item-icon' onClick={addPizza} />
       </div>
-      <span className='basket__item-price'>{price} руб.</span>
+      <span className='basket__item-price'>{price} $</span>
       <FontAwesomeIcon icon={faTimesCircle} className='basket__item-icon times' onClick={deletePizzas} />
     </li>
   );

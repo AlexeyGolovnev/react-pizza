@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import { useForm } from 'react-hook-form';
-import {useSelector} from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import Button from '../Button/Button';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import OrderModal from './OrderModal/OrderModal';
-import {useHistory} from 'react-router';
+import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { useHistory } from 'react-router';
 
 function OrderForm () {
   const { register, handleSubmit, setValue } = useForm();
@@ -33,8 +33,8 @@ function OrderForm () {
       <div className='container'>
         <div className='order__inner'>
           <div className='order__header'>
-            <span className='order__title'>Куда доставить?</span>
-            <span className='order__substitution' onClick={substitution}>Подставить данные из профиля</span>
+            <span className='order__title'>Where to deliver?</span>
+            <span className='order__substitution' onClick={substitution}>Fill with profile data</span>
           </div>
           <form className='order__form' onSubmit={handleSubmit(order)}>
             <input name='street' placeholder='Улица' ref={register} />
@@ -48,9 +48,9 @@ function OrderForm () {
             <div>
               <Button outline path='/basket' classes='button_back qwe'>
                 <FontAwesomeIcon icon={faArrowLeft} />
-                <span>Вернуться в корзину</span>
+                <span>Back to cart</span>
               </Button>
-              <button name='submitBtn' type='submit'>Подтвердить адрес</button>
+              <button name='submitBtn' type='submit'>Confirm address</button>
             </div>
           </form>
           { hasOrdered ? <OrderModal closeModal={() => setHasOrdered(false)} /> : '' }

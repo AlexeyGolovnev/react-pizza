@@ -19,15 +19,15 @@ function Header () {
                 <img className='header__logo-img' src={logo} alt='logo' />
                 <div className='header__logo-text-box'>
                   <h1 className='header__logo-title'>React Pizza</h1>
-                  <span className='header__logo-subtitle'>Самая реактивная пицца</span>
+                  <span className='header__logo-subtitle'>The most reactive pizza</span>
                 </div>
               </Link>
             </div>
           </div>
           <div className='header__btn-box'>
             <Button
-              basket
-              path='/basket'
+              cart
+              path='/cart'
               children={(
                 <BasketBtn
                   totalCount={totalCount}
@@ -38,7 +38,7 @@ function Header () {
             <Button
               outline
               path={!user.id ? '/auth' : '/user'}
-              children={<span className='button_signIn'> {user.id ? 'Кабинет' : 'Вход'} </span>}
+              children={<span className='button_signIn'> {user.id ? 'Profile' : 'Login'} </span>}
             />
           </div>
 

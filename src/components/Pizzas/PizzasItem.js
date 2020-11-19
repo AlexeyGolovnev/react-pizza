@@ -1,12 +1,12 @@
-import React, { useContext, useEffect, useState} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 import AddBtn from '../Button/AddBtn';
 import PizzasItemOptions from './PizzasItemOptions';
-import {addPizzaToBasket, calculateTotalData} from '../../redux/action';
-import {useSelector} from 'react-redux';
-import {createSelector} from 'reselect';
-import PropTypes from 'prop-types';
-import {DispatchContext} from '../../context';
+import { addPizzaToBasket, calculateTotalData } from '../../redux/action';
+import { useSelector } from 'react-redux';
+import { createSelector } from 'reselect';
+import { DispatchContext } from '../../context';
 
 PizzasItem.propTypes = {
   pizzaId: PropTypes.number.isRequired,
@@ -103,8 +103,8 @@ function PizzasItem ({
       />
       <div className='pizzas__item-footer'>
         {currentPrice > 0
-          ? <span className='pizzas__item-price'>{ currentPrice } руб.</span>
-          : <span className='pizzas__item-price'>от { price } руб.</span>
+          ? <span className='pizzas__item-price'>{ currentPrice } $</span>
+          : <span className='pizzas__item-price'>from { price } $</span>
         }
         <Button
           outline

@@ -3,9 +3,11 @@
 @import 'libs/normalize';
 @import 'components/all';
 
-html,body, #root {
-  width: 100%;
+html,body {
   height: 100%;
+}
+#root {
+  min-height: 100%;
 }
 body {
   background-color: $background;
@@ -50,7 +52,14 @@ body {
 }
 
 main {
-  
+  position:relative;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 90vh;
+  @media screen and (max-width:700px) {
+    min-height: 82vh;
+  }
 }
 
 .spinner-box {

@@ -9,11 +9,11 @@ function OrderModal ({ closeModal }) {
     <div className='order__modal-overlay'>
       <div className='order__modal-window'>
         <div className='order__modal-header'>
-          <span className='order__modal-title'>Спасибо за ваш заказ!</span>
+          <span className='order__modal-title'>Thank you for your order!</span>
           <span className='order__modal-close' onClick={closeModal}>&times;</span>
         </div>
         <div className='order__modal-body' >
-          <span className='order__modal-msg'>Наш оператор свяжется с вами для уточнения данных</span>
+          <span className='order__modal-msg'>Our operator will contact you to clarify the data</span>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 Button.propTypes = {
   basket: PropTypes.bool,
@@ -12,12 +12,12 @@ Button.propTypes = {
   classes: PropTypes.any
 };
 
-function Button ({ path, basket, outline, children, action, classes }) {
+function Button ({ path, cart, outline, children, action, classes }) {
   return (
     <Link
       to={path || '/'}
       className={classNames('button', classes, {
-        button_basket: basket,
+        button_basket: cart,
         button_add: outline
       })}
       onClick={action}

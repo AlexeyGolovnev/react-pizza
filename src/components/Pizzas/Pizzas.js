@@ -54,7 +54,7 @@ function Pizzas () {
       <div className='container'>
         <div className='pizzas__inner'>
           {pizzasJsx.length
-            ? <h2>{currentCategory && `${currentCategory.name} пиццы`}</h2>
+            ? <h2>{currentCategory && `${currentCategory.name}`}</h2>
             : <RectangleLoader />
           }
           <div className='pizzas__items-box'>

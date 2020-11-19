@@ -25,7 +25,7 @@ export default function App () {
             </div>
           }>
             <Route exact path='/' component={Main} />
-            <Route exact path='/basket' component={Basket} />
+            <Route exact path='/cart' component={Basket} />
             <Route exact path='/auth' component={Auth} />
             <Route exact path='/user' component={User} />
             <Route exact path='/order' component={Order} />

@@ -1,13 +1,12 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { useForm } from 'react-hook-form';
-import InputMask from 'react-input-mask';
-
-import firebase from 'firebase';
 import { firebaseDb } from '../../firebase';
 import { useHistory } from 'react-router';
 import { getUserProfile } from '../../redux/action';
 import { DispatchContext } from '../../context';
 import { useSelector } from 'react-redux';
+import InputMask from 'react-input-mask';
+import firebase from 'firebase';
 
 function AuthForm () {
   const { dispatch } = useContext(DispatchContext);
@@ -30,7 +29,7 @@ function AuthForm () {
   }, [user]);
   useEffect(() => {
     if (isIncorrectCode) {
-      setWrongCodeMsg('Введенный код не действителен');
+      setWrongCodeMsg('Wrong code entered');
     }
   }, [isIncorrectCode]);
   useEffect(() => {
@@ -56,11 +55,11 @@ function AuthForm () {
         'size': 'invisible',
         'callback': () => sendCodeToPhone(),
         'expired-callback': () => {
-          setErrorMsg('Срок действия капчи истек');
+          setErrorMsg('Captcha has expired');
         }
       });
     } catch (error) {
-      setErrorMsg('Превышен лимит запросов. Повторите попытку позже');
+      setErrorMsg('Request limit exceeded. Please try again later');
     }
   };
   const sendCodeToPhone = (formData) => {
@@ -75,7 +74,7 @@ function AuthForm () {
           setHasCodeSend(true);
           setIsIncorrectCode(false);
         })
-        .catch(error => error && setErrorMsg('Превышен лимит запросов. Повторите попытку позже'));
+        .catch(error => error && setErrorMsg('Request limit exceeded. Please try again later'));
     }
   };
   const checkVerificationCode = (data) => {
@@ -124,12 +123,12 @@ function AuthForm () {
             ? <>
               <div className='authForm__phone-form-box'>
                 <div className='authForm__title-box'>
-                  <h2 className='authForm__title'>Вход в личный кабинет</h2>
+                  <h2 className='authForm__title'>Login</h2>
                   <span>{errorMsg}</span>
                 </div>
                 <form onSubmit={handleSubmit(sendCodeToPhone)} className='authForm__phone-form'>
                   <div>
-                    <label htmlFor='phone'>Номер телефона</label>
+                    <label htmlFor='phone'>Phone</label>
                     <InputMask
                       mask='+375 99 999-99-99'
                       alwaysShowMask
@@ -146,13 +145,13 @@ function AuthForm () {
                       )}
                     </InputMask>
                   </div>
-                  {isIncorrectPhone && <span className='authForm__error'>Неверный формат</span>}
+                  {isIncorrectPhone && <span className='authForm__error'>Wrong format</span>}
                   <div id='recaptcha-container' />
                   <button
                     id='signInWithPhoneNumber'
                     name='getCodeBtn'
                   >
-                    Получить код
+                    Get verification code
                   </button>
                 </form>
               </div>
@@ -160,7 +159,7 @@ function AuthForm () {
             : <>
               <div className='authForm__verificationCode-form-box'>
                 <div className='authForm__title-box'>
-                  <h2 className='authForm__title'>Введите код из смс</h2>
+                  <h2 className='authForm__title'>Enter code from SMS</h2>
                 </div>
                 <form onSubmit={handleSubmit(checkVerificationCode)} className='authForm__verificationCode-form'>
                   <input
@@ -175,12 +174,12 @@ function AuthForm () {
                     })}
                     onChange={handleVerificationCodeInput}
                   />
-                  <span className='authForm__codeTimer'>Код отправлен 0:{timer} </span>
-                  {errors.verificationCode?.type === 'required' && <span className='authForm__error'>Код не введен</span>}
-                  {errors.verificationCode?.type === 'minLength' && <span className='authForm__error'>Код должен содержать 6 цифр</span>}
+                  <span className='authForm__codeTimer'>Code sent 0:{timer} </span>
+                  {errors.verificationCode?.type === 'required' && <span className='authForm__error'>Code not entered</span>}
+                  {errors.verificationCode?.type === 'minLength' && <span className='authForm__error'>Code must be 6 characters long</span>}
                   <span className='authForm__error'>{wrongCodeMsg}</span>
-                  <button name='confirmPhoneBtn'>Подтвердить</button>
-                  <span className='authForm__changeNumber' onClick={backToPhoneInput}> Изменить номер телефона </span>
+                  <button name='confirmPhoneBtn'>Confirm</button>
+                  <span className='authForm__changeNumber' onClick={backToPhoneInput}> Change phone number </span>
                 </form>
               </div>
             </>

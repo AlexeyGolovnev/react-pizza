@@ -7,7 +7,6 @@ import {
   clearSelectedOptions
 } from '../../../redux/action';
 import {DispatchContext} from '../../../context';
-
 import {RectangleLoader} from '../../Loaders/RectangleLoader';
 
 SortPopup.propTypes = {
@@ -15,6 +14,7 @@ SortPopup.propTypes = {
   currentSortCriterionId: PropTypes.number.isRequired,
   pizzasCount: PropTypes.number.isRequired
 };
+
 function SortPopup ({ sortCriteria, currentSortCriterionId, pizzasCount }) {
   const { dispatch } = useContext(DispatchContext);
   const [isOpen, setIsOpen] = useState(false);
@@ -49,7 +49,7 @@ function SortPopup ({ sortCriteria, currentSortCriterionId, pizzasCount }) {
     <div className={classNames('sort', { 'open': isOpen })}>
       {pizzasCount > 0
         ? <>
-          <span className='sort__label'>Сортировка по:</span>
+          <span className='sort__label'>Sort by:</span>
           <span className='sort__name' onClick={togglePopup}>
             {currentSortCriterionObj && currentSortCriterionObj.name}
           </span>

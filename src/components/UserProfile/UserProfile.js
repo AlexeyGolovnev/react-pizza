@@ -1,12 +1,12 @@
-import React, {useContext, useEffect} from 'react';
-import {useForm} from 'react-hook-form';
-import {useSelector} from 'react-redux';
-import {useHistory} from 'react-router';
-import {DispatchContext} from '../../context';
-import {getUserProfile, saveUserProfile, signOut} from '../../redux/action';
+import React, { useContext, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
+import { DispatchContext } from '../../context';
+import { getUserProfile, saveUserProfile, signOut } from '../../redux/action';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import Button from '../Button/Button';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 
 function UserProfile () {
   const { dispatch } = useContext(DispatchContext);
@@ -37,43 +37,44 @@ function UserProfile () {
   return (
     <div className='user-profile'>
       <div className='user-profile__inner'>
-        <span className='user-profile__title'>Профиль</span>
-        <span className='user-profile__subtitle'>Личные данные</span>
+        <span className='user-profile__title'>Profile</span>
+        <span className='user-profile__subtitle'>User profile</span>
         <form className='user-profile__form' onSubmit={handleSubmit(saveUserData)} >
           <div>
-            <label htmlFor='name'>Имя</label>
+            <label htmlFor='name'>Name</label>
             <input name='name' placeholder='' ref={register} />
           </div>
           <div>
-            <label htmlFor='phone'>Телефон</label>
+            <label htmlFor='phone'>Phone</label>
             <input disabled name='phone' placeholder='' ref={register} />
           </div>
           <div>
-            <label htmlFor='street'>Улица</label>
+            <label htmlFor='street'>Street</label>
             <input name='street' placeholder='' ref={register} />
           </div>
           <div>
-            <label htmlFor='house'>Дом</label>
+            <label htmlFor='house'>House</label>
             <input name='house' placeholder='' ref={register} />
           </div>
           <div>
-            <label htmlFor='entrance'>Подъезд</label>
+            <label htmlFor='entrance'>Entrance</label>
             <input name='entrance' placeholder='' ref={register} />
           </div>
           <div>
-            <label htmlFor='floor'>Этаж</label>
+            <label htmlFor='floor'>Floor</label>
             <input name='floor' placeholder='' ref={register} />
           </div>
           <div>
-            <label htmlFor='apartment'>Квартира</label>
+            <label htmlFor='apartment'>Apartment</label>
             <input name='apartment' placeholder='' ref={register} />
           </div>
           <div className='user-profile__btn-box'>
-            <Button outline path='/user' classes='button_back qwe' action={() => dispatch(signOut())}>
+            <Button outline path='/user' classes='button_back' action={() => dispatch(signOut())}>
               <FontAwesomeIcon icon={faArrowLeft} />
-              <span>Выход</span>
+              <span>Log out</span>
             </Button>
-            <button name='save'>Сохранить</button>
+            <button name='save'>Save</button>
+  
           </div>
 
         </form>

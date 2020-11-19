@@ -1,8 +1,8 @@
-import React, {useCallback, useContext} from 'react';
+import React, { useCallback, useContext } from 'react';
 import PizzasOptionsItem from './PizzasOptionsItem';
-import {selectOptions} from '../../redux/action';
 import PropTypes from 'prop-types';
-import {DispatchContext} from '../../context';
+import { DispatchContext } from '../../context';
+import { selectOptions } from '../../redux/action';
 
 PizzasItemOptions.propTypes = {
   pizzaId: PropTypes.number.isRequired,
@@ -44,7 +44,7 @@ function PizzasItemOptions ({
       key={item.id}
       isDisabled={!sizes.map(size => +size.id).includes(item.id)}
       isSelected={selectedSizes.includes(item.id)}
-      text={item.size + ' см.'}
+      text={item.size + ' cm.'}
       handlerOptionsSelection={() => handlerOptionsSelection(pizzaId, '', item.id)}
     />
   ));

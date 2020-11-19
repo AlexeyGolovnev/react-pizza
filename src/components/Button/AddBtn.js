@@ -12,7 +12,7 @@ function AddBtn ({ currentCount, classes }) {
   return (
     <>
       <FontAwesomeIcon icon={faPlus} className='icon' />
-      <span>Добавить</span>
+      <span>Add</span>
       <span className={classNames('pizza-count', classes, {})}>{currentCount}</span>
     </>
   );

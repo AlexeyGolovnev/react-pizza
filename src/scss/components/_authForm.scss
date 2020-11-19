@@ -2,14 +2,16 @@
 @import './../mixins';
 
 .authForm {
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
   @include flex-setting(flex, column, center, center, nowrap);
-  min-width: 100%;
-  height: 100%;
   &__inner {
     display:flex;
     justify-content: center;
     align-items: center;
-    width: 50%;
+   // width: 50%;
     padding: 20px;
     box-shadow: 0 0 10px 1px #ccc;
     border-radius: 5px;
