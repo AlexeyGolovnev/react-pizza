@@ -46,7 +46,7 @@ function OrderForm () {
             <input name='phone' placeholder='Телефон' ref={register} />
             <textarea name='comment' placeholder='Комментарий' ref={register} rows='3' />
             <div>
-              <Button outline path='/basket' classes='button_back qwe'>
+              <Button outline path='/cart' classes='button_back'>
                 <FontAwesomeIcon icon={faArrowLeft} />
                 <span>Back to cart</span>
               </Button>

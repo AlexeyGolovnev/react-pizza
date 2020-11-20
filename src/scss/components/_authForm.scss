@@ -6,6 +6,7 @@
   top:50%;
   left:50%;
   transform: translate(-50%, -50%);
+  min-width: 320px;
   @include flex-setting(flex, column, center, center, nowrap);
   &__inner {
     display:flex;

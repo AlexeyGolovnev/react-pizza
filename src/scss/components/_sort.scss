@@ -5,6 +5,7 @@
   position: relative;
   @include flex-setting(flex, row, center, center, nowrap);
   min-width: 250px;
+  z-index: 42;
   @media (max-width: 550px) {
     & {
       @include font-style(0.9rem, 400);

@@ -106,13 +106,17 @@ function ShoppingBasket () {
                 </div>
               </div>
               <div className='basket__footer'>
-                <Button outline path='/' classes='button_back'>
-                  <FontAwesomeIcon icon={faArrowLeft} />
-                  <span>Back to Home Page</span>
-                </Button>
-                <Button path='/order' classes='button_basket button_pay' >
-                  <span>Order checkout</span>
-                </Button>
+                <div className='basket__footer-btnBox'>
+                  <Button outline path='/' classes='button_back'>
+                    <FontAwesomeIcon icon={faArrowLeft} />
+                    <span>Back to Home Page</span>
+                  </Button>
+                </div>
+                <div className='basket__footer-btnBox'>
+                  <Button path='/order' classes='button_basket button_pay' >
+                    <span>Order checkout</span>
+                  </Button>
+                </div>
               </div>
             </div>
           )}

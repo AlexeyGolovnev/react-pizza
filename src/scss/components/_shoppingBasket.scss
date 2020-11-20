@@ -60,24 +60,50 @@
     }
     white-space: nowrap;
   }
+  &__content-total {
+    @media screen and (max-width:460px) {
+      flex-direction: column;
+    }
+    &-count {
+      @media screen and (max-width:460px) {
+        margin-bottom: 10px;
+      }
+    }
+  }
 
   &__item {
     @include flex-setting(flex, row, space-between, center, nowrap);
     padding: 10px 0;
     border-bottom: 1px solid $gray;
-
-
-
+    text-align: center;
+    @media screen and (max-width:660px) {
+      flex-direction: column;
+      position: relative;
+    }
     &-img-option-box{
      @include flex-setting(flex, row, flex-start, center, nowrap);
       max-width: 300px;
       width: 100%;
+      @media screen and (max-width:460px) {
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      
+    }
+    @media screen and (max-width:660px) {
+      margin-bottom: 10px;
     }
 
     &-img-box {
       min-width: 100px;
       max-width: 100px;
       margin-right: 10px;
+      @media screen and (max-width:460px) {
+        margin-right: 0;
+        margin-bottom: 5px;
+      }
+      
     }
 
     &-img {
@@ -86,6 +112,9 @@
 
     &-option-box {
       @include flex-setting(flex, column, center, flex-start, nowrap);
+      @media screen and (max-width:460px) {
+        align-items: center;
+      }
     }
 
     &-name {
@@ -98,6 +127,9 @@
 
     &-count-box {
      @include flex-setting(flex, row, center, flex-start, nowrap);
+     @media screen and (max-width:460px) {
+      margin-bottom: 15px; 
+     }
     }
 
     &-icon {
@@ -123,6 +155,11 @@
         font-size: 2.3rem;
         color: #D7D7D7;
         transition: color $duration linear;
+        @media screen and (max-width:660px) {
+          position: absolute;
+          top:10px;
+          right: 0;
+        }
       }
 
       &:hover.times {
@@ -138,6 +175,9 @@
     &-price {
       @include font-style(1.2rem, 700);
       width: 120px;
+      @media screen and (max-width:660px) {
+        align-self: flex-end;
+      }
     }
 
   }
@@ -146,6 +186,16 @@
     @include flex-setting(flex, row, space-between, center, nowrap);
     width: 100%;
     margin-top: 20px;
+    @media screen and (max-width:460px) {
+      flex-direction: column;
+      & > div:first-child {
+        order:1;
+      }
+      & > div:last-child {
+        order:0;
+        margin-bottom: 20px;
+      }
+    }
   }
 
 

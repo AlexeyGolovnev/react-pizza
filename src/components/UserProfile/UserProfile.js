@@ -37,8 +37,9 @@ function UserProfile () {
   return (
     <div className='user-profile'>
       <div className='user-profile__inner'>
-        <span className='user-profile__title'>Profile</span>
-        <span className='user-profile__subtitle'>User profile</span>
+        <div className='user-profile__title-box'>
+          <span className='user-profile__title'>Profile</span>
+        </div>
         <form className='user-profile__form' onSubmit={handleSubmit(saveUserData)} >
           <div>
             <label htmlFor='name'>Name</label>

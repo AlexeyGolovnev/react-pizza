@@ -7,9 +7,10 @@
   height: 100%;
   &__inner {
     @include flex-setting(flex, column, center);
-    padding: 20px 0;
+    padding: 30px 0;
     & > h2 {
-      margin-bottom: 30px;
+      margin-bottom: 20px;
+      margin-left: 10px;
       @media (max-width: 425px) {
         & {
          font-size:1.5rem;
@@ -20,16 +21,17 @@
   &__items-box {
     display:grid;
     justify-content: center;
-    grid-template-columns: repeat(auto-fit,minmax(320px,max-content));
+    grid-template-columns: repeat(auto-fit,minmax(300px,max-content));
     grid-gap: 50px 50px;
     width: 100%;
   }
 
   &__item {
     @include flex-setting(flex, column, flex-start, center, wrap);
-    max-width: 320px;
+    max-width: 300px;
     padding:10px;
     box-shadow: 0 0 5px 1px #ebeaea;
+    text-align: center;
   }
 
   &__item-img-box {
@@ -65,7 +67,7 @@
 
   &__dough-box {
     @include flex-setting(flex, space-around, center, wrap);
-    border-bottom: 1px solid $black;
+    border-bottom: 1px solid #ebeaea;
     padding: 5px;
   }
 
